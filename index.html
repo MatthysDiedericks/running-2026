@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SA Sunday Race Calendar 2026 — Coach's Guide</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#222;font-size:14px}
+.app-header{background:linear-gradient(135deg,#1a237e,#1565c0);color:#fff;padding:14px 18px}
+.app-header h1{font-size:19px;font-weight:700}
+.app-header p{font-size:11px;opacity:.8;margin-top:3px}
+.header-row{display:flex;justify-content:space-between;align-items:center}
+.settings-btn{background:rgba(255,255,255,.2);border:none;color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12px}
+.tabs{display:flex;background:#fff;border-bottom:2px solid #e0e4ef;padding:0 14px;overflow-x:auto}
+.tab{padding:11px 16px;cursor:pointer;font-size:13px;font-weight:600;color:#666;border-bottom:3px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .15s}
+.tab:hover{color:#1565c0}
+.tab.active{color:#1565c0;border-bottom-color:#1565c0}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.filters{background:#fff;padding:10px 14px;border-bottom:1px solid #e8ecf0;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+select{padding:5px 10px;border:1px solid #d0d5df;border-radius:6px;font-size:12px;background:#fafbfc;color:#333;outline:none;cursor:pointer}
+select:hover{border-color:#1565c0}
+.toggle-btn{padding:5px 12px;border:1px solid #d0d5df;border-radius:16px;font-size:11px;font-weight:600;cursor:pointer;background:#fafbfc;color:#555;transition:all .15s}
+.toggle-btn.on{background:#1b5e20;color:#fff;border-color:#1b5e20}
+.stats-bar{background:#f8f9ff;padding:7px 14px;border-bottom:1px solid #e8ecf0;display:flex;flex-wrap:wrap;gap:14px;font-size:12px}
+.stat-val{font-weight:700;font-size:14px;color:#1565c0}
+.stat-cq{color:#1b5e20}
+.table-wrap{overflow-x:auto;padding:0 6px 8px}
+table{width:100%;border-collapse:collapse;margin-top:6px}
+thead th{background:#1a237e;color:#fff;padding:8px 9px;text-align:left;font-size:11px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;position:sticky;top:0;z-index:2}
+tbody tr{cursor:pointer;transition:background .1s}
+tbody tr:nth-child(even){background:#fafbfc}
+tbody tr:hover{background:#e8f0fe}
+tbody tr.cq-row{border-left:3px solid #1b5e20}
+td{padding:7px 9px;border-bottom:1px solid #edf0f5;vertical-align:middle;font-size:12px}
+td.rname{font-weight:600;color:#1a237e;max-width:190px}
+.dbadge{display:inline-block;padding:2px 6px;border-radius:8px;font-size:10px;font-weight:700;margin-right:2px}
+.d42{background:#1b5e20;color:#fff}
+.d21{background:#0277bd;color:#fff}
+.pb{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;color:#fff}
+.p-gauteng{background:#1565c0}.p-kzn{background:#2e7d32}.p-wc{background:#00695c}.p-ec{background:#b71c1c}
+.dc{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+.d1{background:#43a047}.d2{background:#8bc34a}.d3{background:#fbc02d}.d4{background:#f57c00}.d5{background:#c62828}
+.ct{background:#1b5e20;color:#fff;padding:1px 5px;border-radius:7px;font-size:9px;font-weight:700;margin-left:4px}
+.days-far{background:#e8f5e9;color:#1b5e20;padding:2px 7px;border-radius:9px;font-size:11px;font-weight:700}
+.days-mid{background:#fff8e1;color:#e65100;padding:2px 7px;border-radius:9px;font-size:11px;font-weight:700}
+.days-soon{background:#fde8e8;color:#c0392b;padding:2px 7px;border-radius:9px;font-size:11px;font-weight:700}
+.days-past{background:#f0f0f0;color:#aaa;padding:2px 7px;border-radius:9px;font-size:11px}
+.mhdr td{background:#e8ecf5;color:#455a7f;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;padding:5px 9px}
+.hint{font-size:11px;color:#7986cb;text-align:right;padding:5px 14px;font-style:italic}
+/* Modal */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:1000;display:none;align-items:center;justify-content:center;padding:16px}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:12px;max-width:820px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.mhd{padding:16px 18px 12px;background:linear-gradient(135deg,#1a237e,#283593);color:#fff;border-radius:12px 12px 0 0;position:sticky;top:0;z-index:1}
+.mhd h2{font-size:16px;font-weight:700;margin-bottom:5px}
+.mhd-meta{display:flex;flex-wrap:wrap;gap:7px;align-items:center;font-size:12px;opacity:.9}
+.mcls{position:absolute;right:14px;top:14px;background:rgba(255,255,255,.2);border:none;color:#fff;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:15px}
+.mhd{position:relative}
+.mbody{padding:16px 18px}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:580px){.mgrid{grid-template-columns:1fr}}
+.msec{background:#f8f9ff;border-radius:8px;padding:13px;border:1px solid #e8ecf5}
+.msec h3{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#455a7f;margin-bottom:9px}
+.ir{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #edf0f5;font-size:12px}
+.ir:last-child{border:none}
+.ik{color:#666;font-weight:600}
+.iv{color:#222;font-weight:500;text-align:right}
+.coach-sec{grid-column:1/-1;background:#f0f4ff;border:1px solid #c5cae9;border-radius:8px;padding:15px}
+.coach-sec h3{font-size:12px;font-weight:700;color:#1a237e;margin-bottom:11px}
+.stars{color:#f9a825;font-size:16px}
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+@media(max-width:450px){.cgrid{grid-template-columns:1fr}}
+.ci{background:#fff;border-radius:6px;padding:9px;border:1px solid #e8ecf5}
+.cil{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:#666;margin-bottom:3px}
+.civ{font-size:12px;font-weight:600}
+.qy{color:#1b5e20}.qc{color:#e65100}.qn{color:#c62828}
+.hl{background:#fff;border-radius:6px;padding:10px;border-left:4px solid #1565c0;margin-bottom:8px}
+.hll{font-size:10px;font-weight:700;text-transform:uppercase;color:#1565c0;margin-bottom:4px;letter-spacing:.4px}
+.wo{background:#fff8e1;border-radius:6px;padding:9px;border-left:4px solid #fbc02d;margin-bottom:8px}
+.wol{font-size:10px;font-weight:700;text-transform:uppercase;color:#e65100;margin-bottom:4px;letter-spacing:.4px}
+.fq{background:#e8eaf6;border-radius:6px;padding:10px;border-left:4px solid #1a237e;margin-bottom:8px}
+.fql{font-size:10px;font-weight:700;text-transform:uppercase;color:#1a237e;margin-bottom:4px;letter-spacing:.4px}
+.fqt{font-style:italic;color:#283593;font-size:12px}
+.pn{background:#e8f5e9;border-radius:6px;padding:9px;border-left:4px solid #2e7d32}
+.pnl{font-size:10px;font-weight:700;text-transform:uppercase;color:#2e7d32;margin-bottom:4px;letter-spacing:.4px}
+.trip-sec{grid-column:1/-1;background:#fff9e6;border:1px solid #ffe082;border-radius:8px;padding:14px}
+.trip-sec h3{font-size:12px;font-weight:700;color:#e65100;margin-bottom:10px}
+.trip-line{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #fce082;font-size:12px}
+.trip-line:last-child{border:none;font-weight:700;font-size:14px;color:#c62828;padding-top:8px}
+.trip-total{background:#fff3cd;border-radius:6px;padding:10px;margin-top:8px;text-align:center;font-size:18px;font-weight:700;color:#c62828}
+.itinerary{background:#fff;border-radius:6px;padding:10px;margin-bottom:10px;font-size:12px;line-height:1.7;border:1px solid #ffe082}
+.it-row{display:flex;gap:8px;align-items:baseline}
+.it-time{font-weight:700;color:#1a237e;min-width:80px;font-size:11px}
+.plan-btn{background:#1b5e20;color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;margin-right:8px}
+.plan-btn.added{background:#c62828}
+.mfooter{padding:12px 18px;border-top:1px solid #e8ecf5;display:flex;gap:8px;flex-wrap:wrap}
+.mbtn{padding:7px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;border:none;text-decoration:none;display:inline-block}
+.mbtn-p{background:#1565c0;color:#fff}.mbtn-ok{background:#1b5e20;color:#fff}.mbtn-cancel{background:#c62828;color:#fff}.mbtn-warn{background:#e65100;color:#fff}
+.mbtn-s{background:#f5f7ff;color:#1a237e;border:1px solid #c5cae9}
+.mbtn-c{background:#f0f0f0;color:#555;margin-left:auto}
+.ph-badge{background:#e8f0fe;color:#1565c0;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700}
+.hl-low{color:#1b5e20;font-weight:700}
+.hl-med{color:#e65100;font-weight:700}
+.hl-high{color:#c62828;font-weight:700}
+/* My Plan tab */
+.plan-container{padding:14px}
+.settings-panel{background:#fff;border-radius:10px;padding:14px;margin-bottom:14px;border:1px solid #e8ecf5;display:none}
+.settings-panel.open{display:block}
+.settings-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.set-item label{display:block;font-size:11px;font-weight:700;color:#666;margin-bottom:4px;text-transform:uppercase}
+.set-item input{width:100%;padding:6px 10px;border:1px solid #d0d5df;border-radius:6px;font-size:13px}
+.plan-summary{background:linear-gradient(135deg,#1b5e20,#2e7d32);color:#fff;border-radius:10px;padding:16px;margin-bottom:14px;text-align:center}
+.plan-total{font-size:28px;font-weight:700}
+.plan-sub{font-size:12px;opacity:.85;margin-top:4px}
+.plan-race-card{background:#fff;border-radius:10px;padding:14px;margin-bottom:10px;border:1px solid #e8ecf5;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.prc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.prc-title{font-size:14px;font-weight:700;color:#1a237e}
+.prc-date{font-size:11px;color:#666}
+.prc-cost-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px}
+.cost-item{background:#f8f9ff;padding:8px;border-radius:6px;border:1px solid #e8ecf5}
+.cost-item-label{font-size:10px;color:#666;font-weight:600}
+.cost-item-val{font-size:14px;font-weight:700;color:#1a237e}
+.cost-total-row{background:#1a237e;color:#fff;padding:10px;border-radius:6px;text-align:center;margin-top:8px;font-size:15px;font-weight:700}
+.remove-btn{background:#c62828;color:#fff;border:none;padding:4px 10px;border-radius:6px;cursor:pointer;font-size:11px}
+.empty-plan{text-align:center;padding:40px;color:#aaa;font-size:14px}
+.empty-plan span{font-size:40px;display:block;margin-bottom:10px}
+/* Training Log */
+.log-container{padding:14px}
+.log-form-wrap{background:#fff;border-radius:10px;padding:16px;margin-bottom:14px;border:1px solid #e8ecf5}
+.log-form-wrap h3{font-size:13px;font-weight:700;color:#1a237e;margin-bottom:12px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.fg-full{grid-column:1/-1}
+.form-field label{display:block;font-size:11px;font-weight:700;color:#555;margin-bottom:4px;text-transform:uppercase}
+.form-field input,.form-field select,.form-field textarea{width:100%;padding:7px 10px;border:1px solid #d0d5df;border-radius:6px;font-size:13px;background:#fff}
+.form-field textarea{height:70px;resize:vertical}
+.log-btn{background:#1565c0;color:#fff;border:none;padding:9px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;margin-top:10px}
+.log-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:14px}
+.ls-card{background:#fff;border-radius:8px;padding:12px;border:1px solid #e8ecf5;text-align:center}
+.ls-val{font-size:22px;font-weight:700;color:#1565c0}
+.ls-label{font-size:11px;color:#666;margin-top:4px}
+.log-list-wrap{background:#fff;border-radius:10px;padding:14px;border:1px solid #e8ecf5}
+.log-entry{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #edf0f5;align-items:center}
+.log-entry:last-child{border:none}
+.log-icon{font-size:24px;width:36px;text-align:center}
+.log-info{flex:1}
+.log-title{font-size:13px;font-weight:700}
+.log-meta{font-size:11px;color:#666;margin-top:2px}
+.log-del{background:#fde8e8;color:#c0392b;border:none;padding:3px 9px;border-radius:6px;cursor:pointer;font-size:11px;font-weight:600}
+.weight-tag{background:#e8f0fe;color:#1565c0;padding:2px 7px;border-radius:8px;font-size:10px;font-weight:700;margin-left:6px}
+/* Diff tab */
+.diff-wrap{padding:14px}
+.diff-hdr{background:#fff;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px;color:#666;border:1px solid #e8ecf5}
+.diff-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.dc-card{background:#fff;border-radius:10px;padding:14px;box-shadow:0 2px 8px rgba(0,0,0,.07);border-top:4px solid #ccc;cursor:pointer;transition:box-shadow .15s}
+.dc-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.dcc-d1{border-top-color:#43a047}.dcc-d2{border-top-color:#8bc34a}.dcc-d3{border-top-color:#fbc02d}.dcc-d4{border-top-color:#f57c00}.dcc-d5{border-top-color:#c62828}
+.dc-card h4{font-size:13px;font-weight:700;color:#1a237e;margin-bottom:5px}
+.dc-meta{font-size:11px;color:#666;margin-bottom:7px}
+.bar-wrap{background:#f0f4f8;border-radius:4px;height:7px;margin-bottom:6px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+.dc-stats{display:flex;gap:12px;font-size:11px;color:#666}
+.tp-wrap{margin-top:12px}
+.tp-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.tp-phase-bar{display:flex;border-radius:6px;overflow:hidden;height:10px;width:100%;margin:6px 0 10px}
+.tp-toggle{background:#1a237e;color:#fff;border:none;padding:7px 14px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:700}
+.tp-sessions-left{font-size:12px;font-weight:700;color:#1b5e20;background:#e8f5e9;padding:4px 10px;border-radius:10px}
+.week-block{border:1px solid #e8ecf5;border-radius:8px;margin-bottom:8px;overflow:hidden}
+.week-hdr{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;cursor:pointer;background:#f8f9ff;user-select:none}
+.week-hdr:hover{background:#eef1fb}
+.week-label{font-size:12px;font-weight:700;color:#1a237e}
+.week-phase{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700;color:#fff}
+.wk-base{background:#1565c0}.wk-build{background:#e65100}.wk-peak{background:#6a1b9a}.wk-taper{background:#1b5e20}.wk-raceweek{background:#c62828}
+.week-body{display:none;padding:10px;grid-template-columns:repeat(5,1fr);gap:6px}
+.week-body.open{display:grid}
+.day-card{background:#fff;border-radius:7px;padding:8px;border:1px solid #e8ecf5;min-height:80px;font-size:11px}
+.day-card.past{opacity:.5}
+.day-card.today{border:2px solid #f9a825}
+.day-name{font-size:10px;font-weight:700;color:#888;text-transform:uppercase;margin-bottom:4px}
+.session-block{margin-bottom:4px;padding:4px 6px;border-radius:5px;font-size:10px;line-height:1.3}
+.s-run{background:#e3f2fd;color:#0d47a1}
+.s-cycle{background:#fff3e0;color:#e65100}
+.s-row{background:#e0f7fa;color:#006064}
+.s-weights{background:#f3e5f5;color:#4a148c}
+.s-rest{background:#f5f5f5;color:#9e9e9e;font-style:italic}
+.s-race{background:#ffebee;color:#c62828;font-weight:700}
+.session-icon{font-size:12px;margin-right:3px}
+.session-detail{color:#666;font-size:9px;margin-top:2px;line-height:1.3}
+.wk-stats{font-size:10px;color:#666;text-align:right;padding-right:4px}
+.pred-card{background:#fff;border-radius:12px;padding:18px;border:1px solid #e0e4ef;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.06)}
+.pred-card h3{font-size:13px;font-weight:700;color:#1a237e;margin-bottom:14px;display:flex;align-items:center;gap:7px}
+.pred-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:12px}
+.pred-input{display:flex;flex-direction:column;gap:4px}
+.pred-input label{font-size:11px;font-weight:600;color:#455a7f;text-transform:uppercase;letter-spacing:.4px}
+.pred-input input{padding:8px 10px;border:1.5px solid #d0d6e8;border-radius:7px;font-size:14px;font-weight:600;width:100%;color:#1a237e}
+.pred-input input:focus{outline:none;border-color:#1565c0}
+.pred-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+.pred-table th{background:#f0f4f8;padding:7px 10px;text-align:left;font-size:11px;color:#455a7f;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.pred-table td{padding:8px 10px;border-bottom:1px solid #edf0f5}
+.pred-table tr:hover td{background:#f8f9ff}
+.pred-table tr.target-row td{background:#e8f5e9;font-weight:700;color:#1b5e20}
+.pred-table tr.cq-row-p td{background:#fff8e1;font-weight:700;color:#e65100}
+.vo2-badge{display:inline-block;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;margin-left:6px}
+.zone-bar{height:8px;border-radius:4px;margin-top:3px}
+.tmill-alert{background:#fff3e0;border-left:4px solid #f57c00;border-radius:0 8px 8px 0;padding:12px 14px;font-size:12px;color:#5d3c00;margin-top:10px}
+.tmill-alert strong{color:#e65100}
+.pred-progress{background:#e8f5e9;border-radius:8px;padding:10px 14px;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="app-header">
+<div class="header-row">
+<div>
+<h1>🏃 SA Sunday Race Calendar 2026 — Coach's Guide</h1>
+<p>Sunday races only (SDA) · Trip costing · Training log · Coach analysis &nbsp;<span id="syncStatus" style="font-size:10px;opacity:.8;font-style:italic"></span></p>
+</div>
+<button class="settings-btn" onclick="toggleSettings()">⚙ Trip Settings</button>
+</div>
+</div>
+
+<div class="tabs">
+<div class="tab active" onclick="switchTab('cal',this)">📅 Race Calendar</div>
+<div class="tab" onclick="switchTab('plan',this)">🗓 My Race Plan <span id="planCount" style="background:#1b5e20;color:#fff;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:700;margin-left:4px">0</span></div>
+<div class="tab" onclick="switchTab('log',this)">🏋️ Training Log</div>
+<div class="tab" onclick="switchTab('diff',this)">📊 Difficulty Chart</div>
+</div>
+
+<!-- CALENDAR TAB -->
+<div class="tab-content active" id="tab-cal">
+<div class="filters">
+<select id="fProv" onchange="render()">
+<option value="">All Provinces</option>
+<option value="gauteng">Gauteng</option>
+<option value="kzn">KwaZulu-Natal</option>
+<option value="wc">Western Cape</option>
+<option value="ec">Eastern Cape</option>
+</select>
+<select id="fDist" onchange="render()">
+<option value="">All Distances</option>
+<option value="42">42km only</option>
+<option value="21">21km only</option>
+</select>
+<button class="toggle-btn" id="btnCQ" onclick="toggleCQ()">🏆 Comrades Qualifiers</button>
+<select id="fDays" onchange="render()">
+<option value="">Any date</option>
+<option value="30">Next 30 days</option>
+<option value="60">Next 60 days</option>
+<option value="90">Next 90 days</option>
+<option value="180">Next 6 months</option>
+<option value="past">Already done</option>
+</select>
+</div>
+<div class="stats-bar" id="statsBar"></div>
+<p class="hint">💡 Click any row to view coach notes + trip cost</p>
+<div class="table-wrap">
+<table>
+<thead><tr>
+<th>#</th><th>Date</th><th>Race</th><th>Province</th><th>Dist</th><th>Difficulty</th><th>Loop</th><th>From Home</th><th>Days Until</th><th>Est. Trip</th>
+</tr></thead>
+<tbody id="tbody"></tbody>
+</table>
+<div id="noRes" style="display:none;padding:40px;text-align:center;color:#aaa">🔍 No races match your filters.</div>
+</div>
+</div>
+
+<!-- MY PLAN TAB -->
+<div class="tab-content" id="tab-plan">
+<div class="plan-container">
+<div class="settings-panel" id="settingsPanel">
+<h3 style="font-size:13px;font-weight:700;color:#1a237e;margin-bottom:12px">⚙ Trip Cost Settings</h3>
+<div class="settings-grid">
+<div class="set-item"><label>Diesel Price (R/L)</label><input type="number" id="sFuel" value="23.50" step="0.50" onchange="saveSettings();renderPlan()"></div>
+<div class="set-item"><label>Consumption (L/100km)</label><input type="number" id="sCons" value="10" step="0.5" onchange="saveSettings();renderPlan()"></div>
+<div class="set-item"><label>Accommodation (R/night)</label><input type="number" id="sAcc" value="900" step="50" onchange="saveSettings();renderPlan()"></div>
+<div class="set-item"><label>Meal Budget (R/meal)</label><input type="number" id="sMeal" value="180" step="10" onchange="saveSettings();renderPlan()"></div>
+<div class="set-item"><label>Race Nutrition (R)</label><input type="number" id="sNutr" value="150" step="25" onchange="saveSettings();renderPlan()"></div>
+<div class="set-item"><label>CT Flight Return (R)</label><input type="number" id="sFlights" value="2800" step="100" onchange="saveSettings();renderPlan()"></div>
+</div>
+<p style="font-size:11px;color:#888;margin-top:10px">Trip = depart Friday after Sabbath · 1 night accommodation Saturday · Race Sunday · Return Sunday afternoon</p>
+</div>
+<!-- RACE PREDICTOR -->
+<div class="pred-card" id="racePredCard">
+<h3>🏁 Race Predictor & VO2max</h3>
+<div style="margin-bottom:12px">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">5km Time Source</div>
+<div style="display:flex;gap:8px;flex-wrap:wrap">
+  <label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:7px 14px;border-radius:7px;border:1.5px solid #d0d6e8;font-size:13px;font-weight:600;transition:all .15s" id="lblRoad">
+    <input type="radio" name="p5src" id="srcRoad" value="road" checked onchange="updatePredSrc()"> 🛣️ Road (GPS)
+  </label>
+  <label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:7px 14px;border-radius:7px;border:1.5px solid #d0d6e8;font-size:13px;font-weight:600;transition:all .15s" id="lblMill">
+    <input type="radio" name="p5src" id="srcMill" value="treadmill" onchange="updatePredSrc()"> 🏟️ Treadmill (belt display)
+  </label>
+</div>
+<div id="inclineRow" style="display:none;margin-top:8px;background:#fff3e0;border-radius:7px;padding:8px 12px;font-size:12px">
+  <label style="font-size:11px;font-weight:600;color:#e65100">Treadmill incline: </label>
+  <select id="pIncline" onchange="runPredictor()" style="padding:4px 8px;border-radius:5px;border:1px solid #ffb74d;margin-left:6px;font-size:12px">
+    <option value="0">0% (flat)</option>
+    <option value="1" selected>1% (road equivalent)</option>
+    <option value="2">2%</option>
+    <option value="3">3%</option>
+  </select>
+  <span style="margin-left:8px;color:#666">— Correction applied to road equivalent automatically</span>
+</div>
+</div>
+<div class="pred-grid">
+<div class="pred-input">
+  <label id="p5minLabel">5km Time — Minutes</label>
+  <input type="number" id="p5min" placeholder="30" min="14" max="60" oninput="runPredictor()">
+</div>
+<div class="pred-input">
+  <label>5km Time — Seconds</label>
+  <input type="number" id="p5sec" placeholder="00" min="0" max="59" oninput="runPredictor()">
+</div>
+<div class="pred-input">
+  <label>Body Weight (kg)</label>
+  <input type="number" id="pWt" placeholder="130" step="0.5" oninput="runPredictor()">
+</div>
+</div>
+<div id="predResults" style="display:none">
+  <div id="predTable"></div>
+  <div id="predVo2"></div>
+  <div id="predZones"></div>
+  <div id="predProgress"></div>
+</div>
+<div id="predHint" style="font-size:11px;color:#1565c0;margin-bottom:6px;min-height:16px"></div>
+<div id="predEmpty" style="font-size:12px;color:#aaa;padding:6px 0">Enter your 5km time above (road or treadmill) to see predictions.</div>
+<div class="tmill-alert">
+  <strong>⚠️ Treadmill vs Garmin — the truth:</strong><br>
+  Your Garmin reads 25–30% short on the treadmill because the wrist accelerometer estimates stride length from arm swing — it degrades badly indoors. <strong>Always use the treadmill belt display for your time and distance, not Garmin.</strong> When entering treadmill times above, use what the treadmill machine shows. Set 1% incline to match road air-resistance — that gives you a road-equivalent training stimulus and zeroes the correction factor.
+</div>
+</div>
+<div class="plan-summary" id="planSummary">
+<div class="plan-total" id="planTotal">R0</div>
+<div class="plan-sub">Estimated total race budget — 0 races selected</div>
+</div>
+<div id="planBody"><div class="empty-plan"><span>📋</span>No races selected yet.<br>Go to the Race Calendar and click a race to add it to your plan.</div></div>
+</div>
+</div>
+
+<!-- TRAINING LOG TAB -->
+<div class="tab-content" id="tab-log">
+<div class="log-container">
+<div class="log-form-wrap">
+<h3>➕ Log a Training Session</h3>
+<div class="form-grid">
+<div class="form-field"><label>Date</label><input type="date" id="lDate"></div>
+<div class="form-field"><label>Activity</label><select id="lAct" onchange="updateLogFields()">
+<option value="run">🏃 Running</option>
+<option value="cycle">🚴 Cycling</option>
+<option value="weights">🏋️ Weight Training</option>
+<option value="squash">🎾 Squash / Padel</option>
+<option value="walk">🚶 Walking</option>
+<option value="swim">🏊 Swimming</option>
+<option value="recovery">🧘 Recovery / Yoga</option>
+</select></div>
+<div class="form-field" id="fEnv"><label>Environment</label><select id="lEnv">
+<option value="road">🛣️ Road</option>
+<option value="treadmill">🏟️ Treadmill</option>
+</select></div>
+<div class="form-field" id="fMg" style="display:none"><label>Muscle Group</label><select id="lMg">
+<option value="push">💪 Push (Chest/Shoulders/Triceps)</option>
+<option value="pull">🏋️ Pull (Back/Biceps)</option>
+<option value="legs">🦵 Legs / Glutes</option>
+<option value="fullbody">🔄 Full Body</option>
+<option value="core">⚡ Core / Abs</option>
+<option value="upper">💪 Upper Body</option>
+<option value="lower">🦵 Lower Body</option>
+</select></div>
+<div class="form-field" id="fKm"><label>Distance (km)</label><input type="number" id="lKm" placeholder="0.0" step="0.1"></div>
+<div class="form-field"><label>Duration (min)</label><input type="number" id="lMin" placeholder="0" oninput="calcCalories()"></div>
+<div class="form-field" id="fHR"><label>Avg HR (bpm)</label><input type="number" id="lHR" placeholder="0"></div>
+<div class="form-field"><label>Effort (RPE 1–10)</label><input type="number" id="lRPE" placeholder="5" min="1" max="10" oninput="calcCalories()"></div>
+<div class="form-field"><label>🔥 Calories Burned</label><input type="number" id="lCal" placeholder="auto" oninput="this.dataset.manual=this.value?'1':'';if(!this.value)delete this.dataset.manual" min="0"><small style="font-size:10px;color:#888;display:block;margin-top:2px">Auto-calculated · or enter manually</small></div>
+<div class="form-field" id="fHeel1"><label>🦴 Heel Pain BEFORE (0–10)</label><input type="number" id="lHB" placeholder="0" min="0" max="10"></div>
+<div class="form-field" id="fHeel2"><label>🦴 Heel Pain AFTER (0–10)</label><input type="number" id="lHA" placeholder="0" min="0" max="10"></div>
+<div class="form-field"><label>Body Weight (kg)</label><input type="number" id="lWt" placeholder="130.0" step="0.1" oninput="calcCalories()"></div>
+<div class="form-field fg-full"><label>Notes</label><textarea id="lNotes" placeholder="How did it feel? Weather? Zone 2 compliance? Anything notable?"></textarea></div>
+</div>
+<button class="log-btn" onclick="logEntry()">✅ Save Session</button>
+</div>
+<div class="log-summary" id="logSummary"></div>
+<div class="log-list-wrap">
+<h3 style="font-size:13px;font-weight:700;color:#1a237e;margin-bottom:12px">📋 Training History</h3>
+<div id="logList"></div>
+</div>
+<div class="trends-wrap" id="trendsWrap" style="margin-top:14px"></div>
+</div>
+</div>
+
+<!-- DIFFICULTY TAB -->
+<div class="tab-content" id="tab-diff">
+<div class="diff-wrap">
+<div class="diff-hdr">42km Sunday qualifier races ranked by difficulty. <strong>Green = best for a qualifying time.</strong> Click for coach analysis + trip cost.</div>
+<div class="diff-cards" id="diffCards"></div>
+</div>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="closeOverlay(event)">
+<div class="modal" id="modal">
+<div class="mhd">
+<button class="mcls" onclick="closeModal()">✕</button>
+<h2 id="mTitle"></h2>
+<div class="mhd-meta" id="mMeta"></div>
+</div>
+<div class="mbody" id="mBody"></div>
+<div class="mfooter" id="mFooter"></div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onerror="window.__sbFail=true"></script>
+<script>
+const MON={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+const PL={gauteng:'Gauteng',kzn:'KwaZulu-Natal',wc:'Western Cape',ec:'Eastern Cape'};
+const PC={gauteng:'p-gauteng',kzn:'p-kzn',wc:'p-wc',ec:'p-ec'};
+const DL={1:'Flat/Fast',2:'Easy Rolling',3:'Moderate',4:'Hilly',5:'Mountain'};
+const DC={1:'#43a047',2:'#8bc34a',3:'#fbc02d',4:'#f57c00',5:'#c62828'};
+const TOLLS={gauteng:285,kzn:140,wc:695,ec:390};
+const ACT_ICON={run:'🏃',cycle:'🚴',weights:'🏋️',squash:'🎾',walk:'🚶',swim:'🏊',recovery:'🧘'};
+const ACT_LABEL={run:'Running',cycle:'Cycling',weights:'Weight Training',squash:'Squash/Padel',walk:'Walking',swim:'Swimming',recovery:'Recovery/Yoga'};
+
+const SUPA_URL='https://munbkvhvzjxqsxzfbcgk.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im11bmJrdmh2emp4cXN4emZiY2drIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE4NTQ1MDYsImV4cCI6MjA5NzQzMDUwNn0.-TXagC3et9VMZ8te3VSvhE53EnrE8vn8hWYX4TnjHnY';
+
+// Supabase no-op stub (used when CDN blocked — e.g. Cowork artifact sandbox)
+class _SbStub {
+  constructor(){this._r=Promise.resolve({data:null,error:'offline'});}
+  from(){return this;} select(){return this;} order(){return this;}
+  eq(){return this;} neq(){return this;} limit(){return this;}
+  upsert(){return this;} insert(){return this;} delete(){return this;} update(){return this;}
+  then(fn,rj){return this._r.then(fn,rj);} catch(fn){return this._r.catch(fn);}
+}
+let sb;
+try {
+  if(window.__sbFail || typeof supabase === 'undefined') throw new Error('offline');
+  sb = supabase.createClient(SUPA_URL, SUPA_KEY);
+} catch(e) {
+  sb = new _SbStub();
+  console.info('Supabase offline — using localStorage fallback');
+}
+
+// ═══════════════════════════════════════════════════════════
+// DB ADAPTER — uses window.cowork.callMcpTool in artifact,
+//              direct Supabase JS in browser file mode
+// ═══════════════════════════════════════════════════════════
+const PROJ='munbkvhvzjxqsxzfbcgk';
+const IS_ARTIFACT=(typeof window.cowork!=='undefined');
+
+function _parseSQL(r){
+  try{
+    const text=r.content?.[0]?.text||'';
+    const m=text.match(/<untrusted-data[^>]*>([\s\S]*?)<\/untrusted-data[^>]*>/);
+    if(m)return JSON.parse(m[1]);
+    // Try direct parse
+    return JSON.parse(text);
+  }catch(e){return [];}
+}
+
+async function dbSQL(sql){
+  if(!IS_ARTIFACT)return[];
+  try{
+    const r=await window.cowork.callMcpTool('mcp__72a3f757-1f59-4330-8af5-a254f6cbcf61__execute_sql',{project_id:PROJ,query:sql});
+    return _parseSQL(r)||[];
+  }catch(e){console.warn('dbSQL error',e);return[];}
+}
+
+function _esc(v){return String(v||'').replace(/'/g,"''");}
+
+// ── Load all data on init ──────────────────────────────────
+async function initDataArtifact(){
+  const el=document.getElementById('syncStatus');
+  if(el)el.textContent='syncing...';
+  try{
+    const[pd,ld,sd,csd]=await Promise.all([
+      dbSQL('SELECT race_id FROM race_plan'),
+      dbSQL('SELECT * FROM training_log ORDER BY date DESC'),
+      dbSQL('SELECT * FROM race_status'),
+      dbSQL("SELECT race_id,day_date,slot,session_type FROM plan_sessions WHERE completed=true"),
+    ]);
+    if(pd&&pd.length){myPlan=pd.map(r=>r.race_id);localStorage.setItem('racePlan',JSON.stringify(myPlan));}
+    if(ld&&ld.length){trainingLog=ld.map(e=>({...e,id:Number(e.id)}));localStorage.setItem('trainingLog',JSON.stringify(trainingLog));}
+    if(sd&&sd.length){raceStatuses=Object.fromEntries(sd.map(r=>[r.race_id,r]));}
+    if(csd&&csd.length){csd.forEach(s=>{const k=s.race_id+'|'+s.day_date+'|'+(s.slot||'')+'|'+s.session_type;completedSessions[k]=true;});}
+    document.getElementById('planCount').textContent=myPlan.length;
+    render();renderLog();initPredictor();renderPlan();
+    if(el){el.textContent='synced ✓';setTimeout(()=>{el.textContent=''},2500);}
+  }catch(e){
+    if(el)el.textContent='offline';
+    console.warn('Artifact DB load failed:',e);
+    render();renderLog();initPredictor();renderPlan();
+  }
+}
+
+// ── Save / delete training log ─────────────────────────────
+async function dbSaveLog(e){
+  if(!IS_ARTIFACT){
+    try{await sb.from('training_log').insert({id:e.id,date:e.date,act:e.act,env:e.env,mg:e.mg,km:e.km,min:e.min,hr:e.hr,rpe:e.rpe,hb:e.hb,ha:e.ha,wt:e.wt,cal:e.cal,notes:e.notes});}catch(err){console.warn('Log save:',err);}
+    return;
+  }
+  await dbSQL(`INSERT INTO training_log (id,date,act,env,mg,km,min,hr,rpe,hb,ha,wt,cal,notes)
+    VALUES (${e.id},'${_esc(e.date)}','${_esc(e.act)}','${_esc(e.env||'')}','${_esc(e.mg||'')}',
+    ${e.km||0},${e.min||0},${e.hr||0},${e.rpe||5},${e.hb?1:0},${e.ha||0},${e.wt||0},${e.cal||0},'${_esc(e.notes||'')}')
+    ON CONFLICT (id) DO UPDATE SET date=EXCLUDED.date,act=EXCLUDED.act,env=EXCLUDED.env,
+    mg=EXCLUDED.mg,km=EXCLUDED.km,min=EXCLUDED.min,hr=EXCLUDED.hr,rpe=EXCLUDED.rpe,
+    hb=EXCLUDED.hb,ha=EXCLUDED.ha,wt=EXCLUDED.wt,cal=EXCLUDED.cal,notes=EXCLUDED.notes`);
+}
+
+async function dbDeleteLog(id){
+  if(!IS_ARTIFACT){
+    try{await sb.from('training_log').delete().eq('id',id);}catch(e){console.warn('Log delete:',e);}
+    return;
+  }
+  await dbSQL(`DELETE FROM training_log WHERE id=${id}`);
+}
+
+// ── Race plan save / delete ────────────────────────────────
+async function dbSavePlan(id,r,dt){
+  if(!IS_ARTIFACT){
+    try{await sb.from('race_plan').upsert({race_id:id,race_name:r.race,race_date:dt,prov:r.prov,dist:r.dist.join(','),entry_type:r.dist.includes('42')?'42':'21'});}catch(e){console.warn('Plan save:',e);}
+    return;
+  }
+  await dbSQL(`INSERT INTO race_plan (race_id,race_name,race_date,prov,dist,entry_type)
+    VALUES ('${_esc(id)}','${_esc(r.race)}','${_esc(dt)}','${_esc(r.prov)}','${_esc(r.dist.join(','))}','${r.dist.includes('42')?'42':'21'}')
+    ON CONFLICT (race_id) DO UPDATE SET race_name=EXCLUDED.race_name,race_date=EXCLUDED.race_date`);
+}
+
+async function dbDeletePlan(id){
+  if(!IS_ARTIFACT){
+    try{await sb.from('race_plan').delete().eq('race_id',id);}catch(e){console.warn('Plan delete:',e);}
+    return;
+  }
+  await dbSQL(`DELETE FROM race_plan WHERE race_id='${_esc(id)}'`);
+}
+
+// ── Race status save ───────────────────────────────────────
+async function dbSaveStatus(data){
+  if(!IS_ARTIFACT){
+    try{await sb.from('race_status').upsert(data);}catch(e){console.warn('Status save:',e);}
+    return;
+  }
+  await dbSQL(`INSERT INTO race_status (race_id,status,last_checked,notes)
+    VALUES ('${_esc(data.race_id)}','${_esc(data.status)}','${_esc(data.last_checked||'')}','${_esc(data.notes||'')}')
+    ON CONFLICT (race_id) DO UPDATE SET status=EXCLUDED.status,last_checked=EXCLUDED.last_checked,notes=EXCLUDED.notes`);
+}
+
+// ── Plan sessions save / tick ──────────────────────────────
+async function dbSaveSessions(rows){
+  if(!IS_ARTIFACT){
+    for(let i=0;i<rows.length;i+=50){sb.from('plan_sessions').upsert(rows.slice(i,i+50)).catch(e=>console.warn('Session save:',e));}
+    return;
+  }
+  // Batch insert 10 at a time to stay under SQL limits
+  for(let i=0;i<rows.length;i+=10){
+    const batch=rows.slice(i,i+10);
+    const vals=batch.map(s=>`('${_esc(s.race_id)}',${s.week_num},'${_esc(s.phase||'')}','${_esc(s.day_date)}','${_esc(s.slot||'')}','${_esc(s.session_type)}',${s.duration_min||0},'${_esc((s.detail||'').substring(0,500))}')`).join(',');
+    await dbSQL(`INSERT INTO plan_sessions (race_id,week_num,phase,day_date,slot,session_type,duration_min,detail)
+      VALUES ${vals}
+      ON CONFLICT (race_id,day_date,slot,session_type) DO UPDATE SET week_num=EXCLUDED.week_num,phase=EXCLUDED.phase,duration_min=EXCLUDED.duration_min,detail=EXCLUDED.detail`);
+  }
+}
+
+async function dbTickSession(raceId,dayDate,slot,type,done){
+  if(!IS_ARTIFACT){
+    const upd=done?{completed:true,completed_at:new Date().toISOString()}:{completed:false,completed_at:null};
+    sb.from('plan_sessions').update(upd).eq('race_id',raceId).eq('day_date',dayDate).eq('slot',slot).eq('session_type',type).catch(e=>console.warn('Tick:',e));
+    return;
+  }
+  const ts=done?`'${new Date().toISOString()}'`:'NULL';
+  await dbSQL(`UPDATE plan_sessions SET completed=${done},completed_at=${ts}
+    WHERE race_id='${_esc(raceId)}' AND day_date='${_esc(dayDate)}' AND slot='${_esc(slot||'')}' AND session_type='${_esc(type)}'`);
+}
+
+async function dbSaveTrainingPlan(meta){
+  if(!IS_ARTIFACT){
+    sb.from('training_plans').upsert(meta).catch(e=>console.warn('Plan meta:',e));
+    return;
+  }
+  await dbSQL(`INSERT INTO training_plans (race_id,total_weeks,base_weeks,build_weeks,peak_weeks,taper_weeks,plan_start,race_date)
+    VALUES ('${_esc(meta.race_id)}',${meta.total_weeks},${meta.base_weeks},${meta.build_weeks},${meta.peak_weeks},${meta.taper_weeks},'${meta.plan_start}','${meta.race_date}')
+    ON CONFLICT (race_id) DO UPDATE SET total_weeks=EXCLUDED.total_weeks,base_weeks=EXCLUDED.base_weeks,
+    build_weeks=EXCLUDED.build_weeks,peak_weeks=EXCLUDED.peak_weeks,taper_weeks=EXCLUDED.taper_weeks,
+    plan_start=EXCLUDED.plan_start,race_date=EXCLUDED.race_date,generated_at=now()`);
+}
+
+let showCQ=false;
+let myPlan=JSON.parse(localStorage.getItem('racePlan')||'[]');
+let trainingLog=JSON.parse(localStorage.getItem('trainingLog')||'[]');
+let raceStatuses={};
+let settings=JSON.parse(localStorage.getItem('tripSettings')||'{"fuel":23.50,"cons":10,"acc":900,"meal":180,"nutr":150}');
+
+async function initData(){
+  if(IS_ARTIFACT){await initDataArtifact();return;}
+  const el=document.getElementById('syncStatus');
+  if(el)el.textContent='syncing...';
+  try{
+    const[{data:pd},{data:ld},{data:sd}]=await Promise.all([
+      sb.from('race_plan').select('race_id'),
+      sb.from('training_log').select('*').order('date',{ascending:false}),
+      sb.from('race_status').select('*')
+    ]);
+    if(pd){myPlan=pd.map(r=>r.race_id);localStorage.setItem('racePlan',JSON.stringify(myPlan));}
+    if(ld){trainingLog=ld.map(e=>({...e,id:Number(e.id)}));localStorage.setItem('trainingLog',JSON.stringify(trainingLog));}
+    if(sd){raceStatuses=Object.fromEntries(sd.map(r=>[r.race_id,r]));}
+    const {data:csd}=await sb.from('plan_sessions').select('race_id,day_date,slot,session_type,completed').eq('completed',true);
+    if(csd){csd.forEach(s=>{const k=s.race_id+'|'+s.day_date+'|'+s.slot+'|'+s.session_type;completedSessions[k]=true;});}
+    document.getElementById('planCount').textContent=myPlan.length;
+    render();renderLog();initPredictor();renderPlan();
+    if(el){el.textContent='synced ✓';setTimeout(()=>{el.textContent='';},2500);}
+  }catch(e){
+    if(el)el.textContent='offline';
+    console.warn('Supabase sync failed:',e);
+    render();renderLog();initPredictor();renderPlan();
+  }
+}
+
+function parseDate(d,y){const p=d.split(' ');return new Date(y,MON[p[2]],parseInt(p[1]));}
+function daysUntil(d,y){
+  const rd=parseDate(d,y);const t=new Date();t.setHours(0,0,0,0);
+  return Math.max(0,Math.round((rd-t)/86400000));
+}
+function daysHtml(d,y){const rd=parseDate(d,y);const t=new Date();t.setHours(0,0,0,0);const n=Math.round((rd-t)/86400000);if(n<0)return'<span class="days-past">Done</span>';if(n===0)return'<span class="days-soon">TODAY!</span>';const c=n>90?'days-far':n>30?'days-mid':'days-soon';return`<span class="${c}">${n}d</span>`;}
+function starsHtml(n){return'⭐'.repeat(n)+'☆'.repeat(5-n);}
+function heelHtml(r){return r==='low'?'<span class="hl-low">🟢 Low</span>':r==='med'?'<span class="hl-med">🟡 Medium</span>':'<span class="hl-high">🔴 High</span>';}
+function qualHtml(q){return q==='yes'?'<span class="qy">✅ Yes — ideal qualifier</span>':q==='cond'?'<span class="qc">⚠️ Conditional</span>':'<span class="qn">❌ Training run only</span>';}
+
+function calcTrip(r){
+  const s=getSettings();
+  if(r.prov==='wc'){
+    // Cape Town: fly from OR Tambo
+    const driveKm=420; // Mhlambanyatsi → OR Tambo one way
+    const fuelORT=Math.round((driveKm*2/100)*s.cons*s.fuel);
+    const parking=500; // OR Tambo parking ~4 days
+    const flights=s.flights||2800; // return flights ORT↔CPT
+    const acc=s.acc*4; // 4 nights Cape Town
+    const meals=s.meal*5*3; // 5 days × 3 meals
+    const transfers=650; // Uber/transfers in CT
+    const nutr=s.nutr;
+    const entry=r.dist.includes('42')?(r.fee42n||380):(r.fee21n||280);
+    const total=fuelORT+parking+flights+acc+meals+transfers+nutr+entry;
+    return{fuelORT,parking,flights,acc,meals,transfers,nutr,entry,total,isFlight:true};
+  }
+  const fuel=Math.round((r.km*2/100)*s.cons*s.fuel);
+  const tolls=TOLLS[r.prov]||0;
+  const acc=s.acc;
+  const meals=s.meal*6;
+  const nutr=s.nutr;
+  const entry=r.dist.includes('42')?(r.fee42n||300):(r.fee21n||220);
+  const total=fuel+tolls+acc+meals+nutr+entry;
+  return{fuel,tolls,acc,meals,nutr,entry,total,isFlight:false};
+}
+function getSettings(){
+  return{
+    fuel:parseFloat(document.getElementById('sFuel')?.value||settings.fuel),
+    cons:parseFloat(document.getElementById('sCons')?.value||settings.cons),
+    acc:parseFloat(document.getElementById('sAcc')?.value||settings.acc),
+    meal:parseFloat(document.getElementById('sMeal')?.value||settings.meal),
+    nutr:parseFloat(document.getElementById('sNutr')?.value||settings.nutr),
+    flights:parseFloat(document.getElementById('sFlights')?.value||settings.flights||2800)
+  };
+}
+function saveSettings(){
+  settings=getSettings();
+  localStorage.setItem('tripSettings',JSON.stringify(settings));
+}
+function tripEtaHtml(r){
+  if(r.prov==='wc'){
+    return`<div class="itinerary">
+<div class="it-row"><span class="it-time">🌅 Thursday</span>Drive Mhlambanyatsi → OR Tambo (~420km, depart after work)</div>
+<div class="it-row"><span class="it-time">✈ Friday</span>Fly OR Tambo → Cape Town International · Check into Cape Town accommodation</div>
+<div class="it-row"><span class="it-time">🌊 Friday–Sat</span>Cape Town: expo, course recce, rest, carb load, sleep early Saturday</div>
+<div class="it-row"><span class="it-time">🕌 Saturday</span>Sabbath rest in Cape Town (no race, no stress)</div>
+<div class="it-row"><span class="it-time">🏃 Sunday</span>Race day! ${r.race} — Cape Town</div>
+<div class="it-row"><span class="it-time">✈ Sunday/Mon</span>Fly Cape Town → OR Tambo · Drive home to Mhlambanyatsi</div>
+</div>`;
+  }
+  const d=Math.round(r.km/90);
+  const depart='18:00 (after Sabbath ends)';
+  return`<div class="itinerary">
+<div class="it-row"><span class="it-time">🌅 Friday</span>Depart Mhlambanyatsi ${depart}</div>
+<div class="it-row"><span class="it-time">🛏 Friday</span>Arrive near ${r.city} (~${r.km}km, ~${d}h) — check into accommodation</div>
+<div class="it-row"><span class="it-time">🕌 Saturday</span>Rest day at accommodation — prepare race gear, eat well, sleep early</div>
+<div class="it-row"><span class="it-time">🏃 Sunday</span>Race day! ${r.race}</div>
+<div class="it-row"><span class="it-time">🏠 Sunday</span>Post-race: drive home (~${r.km}km, depart ~13:00)</div>
+</div>`;
+}
+
+// ═══════════════════════════════════════════════════
+// RACE DATA — SUNDAY ONLY
+// ═══════════════════════════════════════════════════
+const races=[
+// ── GAUTENG ──────────────────────────────────────
+{id:'rac',prov:'gauteng',date:'Sun 21 Jun',year:2026,race:'Race Against Cancer 21km',url:'',location:'Soweto/JHB',city:'Johannesburg',dist:['21'],km:365,fee21n:200,fee42n:null,feeEst:true,diff:3,elev:320,loop:'Single',loopNote:'Scenic Soweto route',comrades:false,
+coach:{stars:3,phase:'Phase 2',heelRisk:'med',qualifier:'no',take:'A 21km in Soweto is great for first race-day experience. Moderate JHB hills — go slow, stay Zone 2, treat it as a long training run.',watchOut:'JHB altitude (1,700m) means you will be 10-15% slower than sea level. Do not chase your watch.',fordyce:'Your long run should be at a pace where you could hold a full conversation.',pacing:'HR 106-120 bpm throughout. Walk all uphills. Training day, not a race.'}},
+
+{id:'gerald',prov:'gauteng',date:'Sun 12 Jul',year:2026,race:'Gerald Fox Memorial 21km',url:'',location:'JHB North',city:'Johannesburg',dist:['21'],km:370,fee21n:200,fee42n:null,feeEst:true,diff:3,elev:350,loop:'Single',loopNote:'JHB suburban hills',comrades:false,
+coach:{stars:3,phase:'Phase 2',heelRisk:'med',qualifier:'no',take:'Classic JHB club race. Use as a medium-long training run. Build race-day confidence without pressure.',watchOut:'July JHB mornings are cold and dry. Warm up the heel before cold starts — 10 min walk + calf raises.',fordyce:'Those who are scared and start slowly have good runs.',pacing:'Zone 2. 7:00-7:30/km. Walk hills, run flats.'}},
+
+{id:'mandela',prov:'gauteng',date:'Sun 19 Jul',year:2026,race:'Mandela Day Walk & Run 21km',url:'',location:'JHB',city:'Johannesburg',dist:['21'],km:370,fee21n:180,fee42n:null,feeEst:true,diff:2,elev:220,loop:'Single',loopNote:'Community event, flatter profile',comrades:false,
+coach:{stars:4,phase:'Phase 2',heelRisk:'low',qualifier:'no',take:'One of the more accessible JHB 21kms — flatter terrain. Great for building base mileage in a relaxed environment.',watchOut:'Large community field — crowded start. Find your pace early and do not get swept into someone else\'s tempo.',fordyce:'The athlete who trains the wisest usually does.',pacing:'Zone 2 throughout. 6:45-7:15/km. Negative split is the goal.'}},
+
+
+{id:'ctfest',prov:'wc',date:'Sun 19 Jul',year:2026,race:'Cape Town Festival of Running 21km',url:'https://runningcalendar.co.za/events/cape-town-festival-of-running/2026',location:'Sea Point, Cape Town',city:'Cape Town',dist:['21'],km:1650,fee21n:250,fee42n:null,feeEst:false,diff:2,elev:150,loop:'Single',loopNote:'Flat Sea Point Promenade. Starts & finishes opposite SABC. Iconic coastal route.',comrades:false,
+coach:{stars:3,phase:'Phase 1-2',heelRisk:'low',qualifier:'no',take:'A flat, well-organised 21km on Cape Town\'s most famous stretch of tarmac. Entry R250 confirmed — excellent value. You\'ll be flying in anyway for Sabbath rest, so this slots perfectly: arrive Friday, rest Saturday, race Sunday. The Sea Point Promenade is essentially pancake flat, which means your time will reflect your aerobic fitness honestly.',watchOut:'This is NOT a Comrades qualifier — 21km only. Use it as a controlled aerobic test rather than an all-out race. Watch the Cape wind off the Atlantic — it can be deceptive. Watch your pacing for the first 5km as crowd energy will pull you too fast.',fordyce:'Flat races are perfect for learning your honest pace. Run the first 10km at Zone 2 — if you\'re still comfortable at 14km, push the last 7km. Never sacrifice form chasing time on a fast course.',pacing:'Zone 2 for km 1-10 (aim 8:30-9:00/km at current fitness). Evaluate at 10km. Negative split goal: second 10km faster than first.',}},
+{id:'socialrun',prov:'kzn',date:'Sun 19 Jul',year:2026,race:'Social Runners Club Half-Marathon',url:'https://runningcalendar.co.za/events/social-runners-club-half-marathon/2026',location:'Durban',city:'Durban',dist:['21'],km:260,fee21n:200,fee42n:null,feeEst:true,diff:2,elev:220,loop:'Single',loopNote:'Durban area, gentle coastal hills. Community-focused event.',comrades:false,
+coach:{stars:2,phase:'Phase 1-2',heelRisk:'low',qualifier:'no',take:'A community 21km in Durban. Shorter drive than most KZN options at 260km. Good Zone 2 aerobic training run — not a qualifier, but solid mileage at race pace. The Durban coastal climate adds humidity challenge which actually strengthens your aerobic engine.',watchOut:'Verify entry fees — estimate used. Not a Comrades qualifier so treat as aerobic training, not time trial. Durban July mornings can be cold early then warm quickly — dress in layers.',fordyce:'Every race you run builds confidence and economy. A 21km in race conditions where you run honest Zone 2 is worth more than three treadmill sessions.',pacing:'Conversational pace throughout. HR target: 106-120 bpm. Use this as a benchmark for your July fitness level.',}},
+{id:'rburg',prov:'gauteng',date:'Sun 26 Jul',year:2026,race:'Randburg Harriers Challenge 21km',url:'',location:'Randburg',city:'Randburg',dist:['21'],km:382,fee21n:200,fee42n:null,feeEst:true,diff:3,elev:380,loop:'Single',loopNote:'Randburg hills, undulating',comrades:false,
+coach:{stars:3,phase:'Phase 2',heelRisk:'med',qualifier:'no',take:'Randburg is hilly — more so than many JHB races. Good hill training but respect the elevation at 130kg.',watchOut:'Randburg terrain compounds fatigue quickly for heavier runners. Walk every hill over 5%.',fordyce:'Hills make you stronger for the long straight.',pacing:'Walk every hill over 100m climb. Run descents conservatively to protect the heel.'}},
+
+{id:'meyiwa',prov:'kzn',date:'Sun 9 Aug',year:2026,race:'Mathews Meyiwa Half-Marathon',url:'https://runningcalendar.co.za/events/mathews-meyiwa-half-marathon/2026',location:'Hammarsdale, Durban',city:'Durban',dist:['21'],km:270,fee21n:180,fee42n:null,feeEst:true,diff:3,elev:310,loop:'Single',loopNote:'Hammarsdale area west of Durban. KZN midlands rolling terrain. National Women\'s Day event.',comrades:false,
+coach:{stars:2,phase:'Phase 2',heelRisk:'med',qualifier:'no',take:'Women\'s Day half-marathon in the KZN midlands. The Hammarsdale terrain is characteristically rolling — typical KZN ups and downs. At 270km from home it\'s a reasonable overnight trip. Not a qualifier but gives good race-conditions aerobic work. Phase 2 ready runners can use this as a quality training stimulus.',watchOut:'Hammarsdale elevation (310m gain) makes this harder than flat coastal races. Do not race it hard — this is a training-stimulus run. At current weight, save the hard efforts for qualifying races with better elevation profiles. Verify entry fee (estimate used).',fordyce:'The KZN midlands will teach you hills better than any track session. Embrace the climbs — walk the steep ones if needed — the descents are your reward.',pacing:'Walk all hills steeper than 5% gradient. HR cap: 130 bpm on climbs. Run flat sections at Zone 2. This is a hill-tolerance day, not a time trial.',}},
+{id:'olded',prov:'gauteng',date:'Sun 9 Aug',year:2026,race:'Old Eds Road Race 21km',url:'',location:'JHB',city:'Johannesburg',dist:['21'],km:370,fee21n:200,fee42n:null,feeEst:true,diff:3,elev:340,loop:'Single',loopNote:'JHB suburban course',comrades:false,
+coach:{stars:3,phase:'Phase 2',heelRisk:'med',qualifier:'no',take:'Solid mid-winter JHB 21km. August is a good training month — use this to sharpen before the September qualifier season.',watchOut:'August JHB is cold and dry. Protect the heel with a proper warm-up in cold conditions.',fordyce:'You do not need to run yourself into the ground in training. You need to run yourself into shape.',pacing:'Zone 2 throughout. 6:45-7:30/km depending on the hills.'}},
+
+{id:'mams',prov:'gauteng',date:'Sun 16 Aug',year:2026,race:'Mams Half-Marathon 21km',url:'',location:'Pretoria',city:'Pretoria',dist:['21'],km:418,fee21n:220,fee42n:null,feeEst:true,diff:3,elev:300,loop:'Single',loopNote:'Pretoria suburban course',comrades:false,
+coach:{stars:3,phase:'Phase 2',heelRisk:'med',qualifier:'no',take:'Pretoria 21km in August. Good preparation event before September marathons.',watchOut:'418km from Mhlambanyatsi — long drive for a 21km. Only worth it if you are already in Pretoria.',fordyce:'Taper is not a reward for training. Taper is part of training.',pacing:'Zone 2 base building. Nothing heroic.'}},
+
+{id:'wand',prov:'gauteng',date:'Sun 23 Aug',year:2026,race:'Wanderers Road Race 21km',url:'',location:'JHB North',city:'Johannesburg',dist:['21'],km:372,fee21n:200,fee42n:null,feeEst:true,diff:3,elev:360,loop:'Single',loopNote:'JHB northern suburbs',comrades:false,
+coach:{stars:3,phase:'Phase 2',heelRisk:'med',qualifier:'no',take:'Classic JHB club race from the iconic Wanderers venue. Northern suburbs have solid hills — good training.',watchOut:'Very popular race — large fields, busy start. Find space in the first 3km to settle your pace.',fordyce:'Those who are scared and start slowly have good runs.',pacing:'Zone 2. Hold back on the first 5km. Let others go.'}},
+
+{id:'kyalami',prov:'gauteng',date:'Sun 30 Aug',year:2026,race:'Kyalami Corner Striders 21km',url:'',location:'Midrand',city:'Midrand',dist:['21'],km:394,fee21n:200,fee42n:null,feeEst:true,diff:2,elev:200,loop:'Single',loopNote:'Midrand, flatter than central JHB',comrades:false,
+coach:{stars:4,phase:'Phase 2',heelRisk:'low',qualifier:'no',take:'Midrand runs flatter than JHB proper. Good Zone 2 training near the F1 track.',watchOut:'N1/N14 traffic can be a logistical challenge. Leave early.',fordyce:'Your long run should be at a pace where you could hold a full conversation.',pacing:'Zone 2 pace-setter. Target 6:30-7:00/km.'}},
+
+{id:'linton',prov:'gauteng',date:'Sun 30 Aug',year:2026,race:'Linton\'s Corner Spring Race 21km',url:'',location:'Pretoria North',city:'Pretoria',dist:['21'],km:418,fee21n:220,fee42n:null,feeEst:true,diff:2,elev:250,loop:'Single',loopNote:'Pretoria North, relatively flat',comrades:false,
+coach:{stars:3,phase:'Phase 2',heelRisk:'low',qualifier:'no',take:'End-of-winter Pretoria race. Good for getting race confidence before September marathon season.',watchOut:'418km from home. Only if you are already in Pretoria for other reasons.',fordyce:'The athlete who trains the wisest usually does.',pacing:'Zone 2 base run. 6:45-7:15/km.'}},
+
+{id:'zone3',prov:'gauteng',date:'Sun 6 Sep',year:2026,race:'aQuelle Zone 3 Marathon',url:'http://www.zone3marathon.co.za/',location:'Southgate / JHB South',city:'Johannesburg',dist:['42','21'],km:368,fee21n:250,fee42n:350,feeEst:false,diff:3,elev:531,loop:'Double',loopNote:'2 laps of JHB South roads. Real hills on each lap.',comrades:true,
+coach:{stars:3,phase:'Phase 3',heelRisk:'med',qualifier:'cond',take:'A genuine Comrades qualifier but 531m of climbing across two loops will cost you 20-30 minutes vs a flat course. Not your best qualifier option — but excellent training for Comrades itself.',watchOut:'Double loop with real hills. Most runners blow up on loop 2 trying to match loop 1. Honour Fordyce: hold back on lap 1.',fordyce:'Those who are scared and start slowly have good runs. Those who are too bold often suffer.',pacing:'Loop 1: 7:00-7:15/km, walk ALL uphills. Loop 2: 7:15-7:30/km. Sub-5h is a stretch here at current weight.'}},
+
+{id:'vrcm',prov:'gauteng',date:'Sun 13 Sep',year:2026,race:'Rand Water Vaal River City Marathon',url:'http://www.vrcm.co.za/',location:'Vanderbijlpark',city:'Vanderbijlpark',dist:['42','21'],km:318,fee21n:240,fee42n:290,feeEst:false,diff:1,elev:120,loop:'Double',loopNote:'2 flat laps along the Vaal River. PB course — minimal elevation, fast road.',comrades:true,
+coach:{stars:5,phase:'Phase 3',heelRisk:'low',qualifier:'yes',take:'Your #1 Gauteng qualifier target. The flattest marathon in the province. Two laps of flat Vaal River road with almost no climbing. At 130kg, flat courses are where you reclaim time. Double loop lets you pace perfectly: conservative lap 1, hold form on lap 2.',watchOut:'Double loop mental trap: the temptation after lap 1 is to push. Resist completely. Your legs lie to you at 25km.',fordyce:'Those who are scared and start slowly have good runs. Those who are too bold often suffer.',pacing:'Lap 1: 7:00/km (Zone 2, HR 106-118). Lap 2: hold 7:00/km if strong, 7:10-7:15/km if honest. Sub-5h = 7:07/km average.'}},
+
+{id:'jeppe',prov:'gauteng',date:'Sun 20 Sep',year:2026,race:'Balwin Sport Jeppe Marathon',url:'',location:'Jeppe / Bedfordview, JHB East',city:'Johannesburg',dist:['42','21'],km:375,fee21n:250,fee42n:320,feeEst:true,diff:4,elev:480,loop:'Double',loopNote:'2 hilly laps through Jeppe/Bedfordview. Significant elevation.',comrades:true,
+coach:{stars:2,phase:'Phase 3',heelRisk:'high',qualifier:'cond',take:'Jeppe is honest: hilly JHB marathon that will reveal exactly what your legs can do. Not ideal for first qualifier attempt. Do VRCM first, then Jeppe for strength.',watchOut:'480m of climbing at 130kg is demanding. Heel risk HIGH on sustained downhills — eccentric load is significant. Walk all uphills and downhills steeper than 5%.',fordyce:'Hills make you stronger for the long straight — but only if you respect them.',pacing:'Do not attempt sub-5h here at current weight. Run for completion. 7:30-8:00/km. Walk all hills.'}},
+
+{id:'heritage',prov:'gauteng',date:'Sun 27 Sep',year:2026,race:'Heritage Day Race 21km',url:'',location:'Vanderbijlpark',city:'Vanderbijlpark',dist:['21'],km:318,fee21n:200,fee42n:null,feeEst:true,diff:1,elev:110,loop:'Single',loopNote:'Flat Vanderbijlpark roads — same area as VRCM',comrades:false,
+coach:{stars:5,phase:'Phase 2',heelRisk:'low',qualifier:'no',take:'Flat Vanderbijlpark 21km — same flat terrain as VRCM. Perfect Zone 2 training. Good to use as a pre-qualifier recce of the area.',watchOut:'Heritage weekend can be busy. Plan ahead for accommodation if driving up.',fordyce:'Your long run should be at a pace where you could hold a full conversation.',pacing:'Zone 2 target. Sub-2:30h realistic at Phase 3.'}},
+
+{id:'madmac',prov:'gauteng',date:'Sun 4 Oct',year:2026,race:'Midvaal MADMAC Marathon',url:'',location:'Meyerton / Vaal Triangle',city:'Meyerton',dist:['42'],km:325,fee21n:null,fee42n:280,feeEst:true,diff:1,elev:140,loop:'Single',loopNote:'Single loop through Meyerton farmlands. Flat to gently rolling.',comrades:true,
+coach:{stars:5,phase:'Phase 3',heelRisk:'low',qualifier:'yes',take:'MADMAC is underrated. Single loop, flat Vaal Triangle farmland, October spring conditions — excellent qualifier. Less pressure than big city races. Quiet, well-run, gives you space to focus on pace.',watchOut:'Small field means no pacing groups. You need a watch strategy for the full 42km. Study the course split map beforehand.',fordyce:'The Comrades is not won on the uphills or the downhills — it\'s won or lost in your preparation.',pacing:'October spring temps are ideal. Target 7:00-7:10/km for sub-5h. Run with your watch, not your feelings.'}},
+
+{id:'pps',prov:'gauteng',date:'Sun 8 Nov',year:2026,race:'PPS Alberton Half-Marathon 21km',url:'',location:'Alberton',city:'Alberton',dist:['21'],km:352,fee21n:220,fee42n:null,feeEst:true,diff:2,elev:240,loop:'Single',loopNote:'Alberton suburban, mild hills',comrades:false,
+coach:{stars:4,phase:'Phase 2',heelRisk:'low',qualifier:'no',take:'By November you should be building toward Phase 4. Use this as a time trial to assess half-marathon fitness and project your marathon time.',watchOut:'If 21km pace is above 2:30h, your marathon qualifier window gets tight. Honest feedback is valuable here.',fordyce:'You do not need to run yourself into the ground in training. You need to run yourself into shape.',pacing:'Race this one — push to comfortable-hard (Zone 3-4) for a realistic time trial.'}},
+
+{id:'soweto',prov:'gauteng',date:'Sun 29 Nov',year:2026,race:'African Bank Soweto Marathon',url:'http://www.sowetomarathon.com/',location:'Soweto, JHB',city:'Soweto',dist:['42','21'],km:365,fee21n:280,fee42n:420,feeEst:false,diff:4,elev:458,loop:'Single',loopNote:'Single loop through Soweto. Iconic race but serious hills.',comrades:true,
+coach:{stars:3,phase:'Phase 4',heelRisk:'high',qualifier:'cond',take:'Soweto is a bucket-list race — electric atmosphere, hundreds of thousands of spectators. But 458m of climbing means this is NOT your first qualifier attempt. Do VRCM or MADMAC first. Come to Soweto for the experience once you are qualified.',watchOut:'Final 15km of Soweto has relentless rolling hills. At 130kg in November heat, this will test everything. Heel risk HIGH on downhills.',fordyce:'Those who are scared and start slowly have good runs.',pacing:'If entering: 7:30/km for first 25km. Accept slow final 10km. Completion over time.'}},
+
+{id:'sedibeng',prov:'gauteng',date:'Sun 6 Dec',year:2026,race:'Sedibeng Marathon',url:'',location:'Vereeniging',city:'Vereeniging',dist:['42','21'],km:312,fee21n:240,fee42n:300,feeEst:true,diff:1,elev:130,loop:'Double',loopNote:'2 flat laps along Vaal River. Very similar profile to VRCM.',comrades:true,
+coach:{stars:5,phase:'Phase 3',heelRisk:'low',qualifier:'yes',take:'December Sedibeng is your backup qualifier if VRCM or MADMAC does not go to plan. Flat Vereeniging terrain, cooler December mornings. Very similar to VRCM. Having this as a Plan B is smart.',watchOut:'December heat can creep in if race starts late. Confirm start time — aim for earliest wave.',fordyce:'Taper is not a reward for training. Taper is part of training.',pacing:'Same as VRCM: 7:00/km both laps, hold form at 30km.'}},
+
+{id:'skosana',prov:'gauteng',date:'Sun 6 Dec',year:2026,race:'Skosana Legend Race 21km',url:'',location:'Pretoria',city:'Pretoria',dist:['21'],km:418,fee21n:220,fee42n:null,feeEst:true,diff:3,elev:310,loop:'Single',loopNote:'Pretoria suburban hills',comrades:false,
+coach:{stars:2,phase:'Phase 2',heelRisk:'med',qualifier:'no',take:'Far drive (418km) for a 21km. Only do this if you are already in Pretoria.',watchOut:'December Pretoria heat is real.',fordyce:'Those who are scared and start slowly have good runs.',pacing:'Zone 2 only. No heroics.'}},
+
+{id:'sandton',prov:'gauteng',date:'Sun 13 Dec',year:2026,race:'Sandton Half-Marathon 21km',url:'',location:'Sandton',city:'Sandton',dist:['21'],km:392,fee21n:250,fee42n:null,feeEst:true,diff:2,elev:230,loop:'Single',loopNote:'Sandton area, mixed profile',comrades:false,
+coach:{stars:3,phase:'Phase 2',heelRisk:'med',qualifier:'no',take:'Year-end 21km in Sandton. Treat as easy Zone 2 — recovery pace heading into Christmas.',watchOut:'December heat. Start early, carry water.',fordyce:'Your long run should be at a pace where you could hold a full conversation.',pacing:'Easy Zone 2. Let 2026 end well.'}},
+
+// ── KwaZulu-Natal (Sundays only) ─────────────────
+{id:'savages',prov:'kzn',date:'Sun 16 Aug',year:2026,race:'Savages Challenge 21km',url:'',location:'Durban',city:'Durban',dist:['21'],km:260,fee21n:200,fee42n:null,feeEst:true,diff:2,elev:180,loop:'Single',loopNote:'Durban coastal, gentle hills',comrades:false,
+coach:{stars:4,phase:'Phase 2',heelRisk:'low',qualifier:'no',take:'Durban sea-level 21km — sea level means you will be faster than at JHB altitude. A confidence booster.',watchOut:'August Durban humidity is higher than Swaziland. Hydrate early, more than you think you need.',fordyce:'Those who are scared and start slowly have good runs.',pacing:'Zone 2 at sea level will feel easier. Target 6:30-7:00/km.'}},
+
+{id:'lucia',prov:'kzn',date:'Sun 23 Aug',year:2026,race:'La Lucia Mall Half-Marathon 21km',url:'',location:'La Lucia, Durban North',city:'Durban',dist:['21'],km:260,fee21n:200,fee42n:null,feeEst:true,diff:2,elev:190,loop:'Single',loopNote:'Durban North coastal, gentle undulations',comrades:false,
+coach:{stars:4,phase:'Phase 2',heelRisk:'low',qualifier:'no',take:'Flat KZN coastal 21km in late August. Good race to pair with a Durban training weekend.',watchOut:'Durban North humidity can surprise. Your HR will run higher than expected even at slow pace.',fordyce:'Your long run should be at a pace where you could hold a full conversation.',pacing:'Sea level benefit. 6:30-7:00/km Zone 2 target.'}},
+
+{id:'wasbank',prov:'kzn',date:'Sun 27 Sep',year:2026,race:'Wasbank Marathon',url:'',location:'Ladysmith',city:'Ladysmith',dist:['42','21'],km:200,fee21n:200,fee42n:260,feeEst:true,diff:2,elev:280,loop:'Single',loopNote:'Out-and-back through KZN Natal midlands. Rolling but manageable.',comrades:true,
+coach:{stars:4,phase:'Phase 3',heelRisk:'med',qualifier:'yes',take:'Ladysmith is your closest Sunday qualifier at 200km — just over 2 hours from home. Rolling KZN midlands, cool September weather. For a first qualifier attempt, the small field is an advantage — no pressure, race your own race. Fordyce would approve of the honest countryside course.',watchOut:'280m of climbing will add 15-20 minutes vs a flat course. No pacing groups in a small field — know your 7:07/km pace and carry a watch.',fordyce:'The Comrades is not won on the uphills or the downhills — it\'s won or lost in your preparation.',pacing:'7:00-7:10/km on flats, walk steep uphills, controlled on descents (heel protection). Target 4:50-5:00h.'}},
+
+{id:'southcoast',prov:'kzn',date:'Sun 4 Oct',year:2026,race:'South Coast Marathon',url:'',location:'Shelly Beach, South Coast',city:'Shelly Beach',dist:['42','21'],km:340,fee21n:250,fee42n:320,feeEst:true,diff:3,elev:380,loop:'Single',loopNote:'KZN South Coast rolling terrain, sea views.',comrades:true,
+coach:{stars:3,phase:'Phase 3',heelRisk:'med',qualifier:'cond',take:'Gorgeous KZN South Coast route — rolling hills and sea views. But 380m of climbing makes sub-5h a challenge. Best as a Comrades simulation run, not your first qualifier attempt.',watchOut:'South Coast hills compound in the second half. Many runners who go fast on the opening flat 10km pay the price after Margate.',fordyce:'Those who are scared and start slowly have good runs.',pacing:'First half conservatively at 7:10/km. Walk all uphills. Finish is what matters.'}},
+
+{id:'sapphire',prov:'kzn',date:'Sun 25 Oct',year:2026,race:'Sapphire Coast Marathon',url:'',location:'Durban',city:'Durban',dist:['42','21'],km:260,fee21n:260,fee42n:340,feeEst:true,diff:2,elev:200,loop:'Single',loopNote:'Coastal Durban course, relatively flat.',comrades:true,
+coach:{stars:4,phase:'Phase 3',heelRisk:'low',qualifier:'yes',take:'Sapphire is an underrated Durban qualifier. October Durban has excellent running weather — not yet summer hot, sea-level air is kind to heavy runners. If Wasbank does not produce a qualifier, Sapphire is your October backup.',watchOut:'October Durban can start warming. Check forecast: above 22°C at start, adjust pace targets upward by 15-20 seconds/km.',fordyce:'Taper is not a reward for training. Taper is part of training.',pacing:'Sub-5h target: 7:05/km. Sea level gives a natural advantage — do not waste it going out too fast.'}},
+
+{id:'hope',prov:'kzn',date:'Sun 8 Nov',year:2026,race:'Hope Challenge Marathon',url:'',location:'Durban',city:'Durban',dist:['42','21'],km:260,fee21n:260,fee42n:340,feeEst:true,diff:2,elev:220,loop:'Single',loopNote:'Durban coastal course. Community-focused event.',comrades:true,
+coach:{stars:4,phase:'Phase 3',heelRisk:'low',qualifier:'cond',take:'November Durban marathon — by now your training should be peaking. Good backup qualifier if you have not secured one yet. November is the last realistic qualifier window before December heat sets in.',watchOut:'November Durban temperatures start rising. This is the last month where coastal flat conditions are reliably cool enough for a qualifier attempt.',fordyce:'You do not need to run yourself into the ground in training. You need to run yourself into shape.',pacing:'7:05/km target. Hold Zone 2 for 30km, then permit Zone 3 in the final 10km.'}},
+
+{id:'bluff',prov:'kzn',date:'Sun 29 Nov',year:2026,race:'Bluff Marathon',url:'',location:'The Bluff, Durban',city:'Durban',dist:['42','21'],km:260,fee21n:240,fee42n:310,feeEst:true,diff:3,elev:420,loop:'Single',loopNote:'Hilly Bluff area. Notoriously tough.',comrades:true,
+coach:{stars:2,phase:'Phase 4',heelRisk:'high',qualifier:'cond',take:'The Bluff is brutal — relentless hills. This is a Comrades strength-training run, not your first qualifier. The Bluff teaches your legs what late Comrades feels like. Do a flat qualifier first, then come here for character.',watchOut:'Hills on the Bluff are steep. Heel risk HIGH on steep downhills at 130kg. Walk every hill over 5% grade until under 120kg.',fordyce:'Hills make you stronger for the long straight — but only if you respect them.',pacing:'No time target. Completion and safety. Walk every hill over 5% grade.'}},
+
+// ── WESTERN CAPE (Sundays only) ──────────────────
+{id:'gunrun',prov:'wc',date:'Sun 13 Sep',year:2026,race:'OUTsurance Gun Run 21km',url:'https://www.gunrun.co.za/',location:'Sea Point, Cape Town',city:'Cape Town',dist:['21'],km:1650,fee21n:280,fee42n:null,feeEst:false,diff:2,elev:180,loop:'Single',loopNote:'Flat Sea Point promenade. Iconic Cape Town 21km.',comrades:false,
+coach:{stars:3,phase:'Phase 2',heelRisk:'low',qualifier:'no',take:'The Gun Run is one of SA\'s most famous 21kms — Sea Point promenade, mountain backdrop, electric atmosphere. But it is a FLIGHT + 3 NIGHTS from Mhlambanyatsi. Plan as a Cape Town race holiday.',watchOut:'1,650km requires a flight (~R3,000 return) + 3 nights accommodation. Only do this if also entering Blouberg to make the trip worthwhile.',fordyce:'Those who are scared and start slowly have good runs.',pacing:'Sea level, flat promenade. Zone 2 at sub-2:15h should feel achievable by September.'}},
+
+{id:'chapmans',prov:'wc',date:'Sun 20 Sep',year:2026,race:'Chapman\'s Peak Half-Marathon 21km',url:'',location:'Hout Bay, Cape Town',city:'Cape Town',dist:['21'],km:1650,fee21n:280,fee42n:null,feeEst:true,diff:4,elev:450,loop:'Single',loopNote:'Chapman\'s Peak Drive. Stunning but seriously hilly.',comrades:false,
+coach:{stars:2,phase:'Phase 3',heelRisk:'high',qualifier:'no',take:'Chapman\'s Peak is one of the most photographed 21kms in the world. Beautiful coastal cliffs. But 450m of climbing with steep descents is a heel risk. Save this for after Phase 4.',watchOut:'Steep cliff-side descents are particularly hard on heel tendons at 130kg.',fordyce:'Hills make you stronger — but only if you respect them.',pacing:'Experience only. No time target.'}},
+
+{id:'blouberg',prov:'wc',date:'Sun 4 Oct',year:2026,race:'Intercare Blouberg Marathon',url:'',location:'Blouberg, Cape Town',city:'Cape Town',dist:['42','21'],km:1650,fee21n:280,fee42n:380,feeEst:true,diff:1,elev:100,loop:'Single',loopNote:'Flat coastal Cape Town. One of SA\'s fastest qualifier courses. Table Mountain backdrop.',comrades:true,
+coach:{stars:5,phase:'Phase 3',heelRisk:'low',qualifier:'yes',take:'Cape Town is worth the trip. Blouberg is arguably SA\'s most qualifier-friendly marathon — sea level, flat coastal road, massive field with pacing groups, and Table Mountain watching over you. The sea-level altitude advantage is the equivalent of being 8-10 minutes faster than a Highveld race.',watchOut:'You need to FLY — budget R5,500-7,500 all-in for flights + 3 nights accommodation. October Cape Town wind (the Cape Doctor) can significantly slow times. Check forecast before race day.',fordyce:'Those who are scared and start slowly have good runs.',pacing:'Sea level + flat = ideal. 6:55-7:05/km for sub-5h. Find the 5:00h pacer and stay behind them.'}},
+
+// ── EASTERN CAPE (Sundays only) ──────────────────
+{id:'masters',prov:'ec',date:'Sun 6 Sep',year:2026,race:'Masters Marathon',url:'',location:'East London',city:'East London',dist:['42','21'],km:790,fee21n:240,fee42n:300,feeEst:true,diff:3,elev:320,loop:'Single',loopNote:'East London coastal route. Rolling terrain.',comrades:true,
+coach:{stars:2,phase:'Phase 3',heelRisk:'med',qualifier:'cond',take:'East London at 790km is a significant trip. Rolling coastal terrain, good September weather. Only worth it if making a coastal trip and plan to explore the Eastern Cape.',watchOut:'790km is a full 2-night trip or a flight. Only if you have other reasons to be in EL.',fordyce:'The athlete who trains the wisest usually does.',pacing:'7:05-7:15/km on rolling terrain.'}},
+
+{id:'elliot',prov:'ec',date:'Sun 20 Sep',year:2026,race:'Elliot Madeira Marathon',url:'',location:'Mthatha',city:'Mthatha',dist:['42','21'],km:660,fee21n:220,fee42n:280,feeEst:true,diff:3,elev:380,loop:'Single',loopNote:'Mthatha/Transkei rolling hills.',comrades:true,
+coach:{stars:2,phase:'Phase 3',heelRisk:'med',qualifier:'cond',take:'Mthatha rolling Transkei hills — 660km from home. Beautiful cultural area but not a practical qualifier route when closer flat options exist.',watchOut:'Transkei terrain is characteristically rolling. 660km + 380m climbing = adventure, not a qualifier target.',fordyce:'Those who are scared and start slowly have good runs.',pacing:'7:15-7:30/km on undulating Transkei terrain.'}}
+];
+
+// ═══════════════════════════════════
+// RENDERING
+// ═══════════════════════════════════
+function switchTab(id,el){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  el.classList.add('active');
+  if(id==='diff') renderDiff();
+  if(id==='plan'){renderPlan();initPredictor();}
+  if(id==='log') renderLog();
+}
+function toggleCQ(){showCQ=!showCQ;document.getElementById('btnCQ').className='toggle-btn'+(showCQ?' on':'');render();}
+function toggleSettings(){const p=document.getElementById('settingsPanel');p.classList.toggle('open');}
+
+function getFiltered(){
+  const pv=document.getElementById('fProv').value;
+  const dv=document.getElementById('fDist').value;
+  const dy=document.getElementById('fDays').value;
+  const today=new Date();today.setHours(0,0,0,0);
+  return races.filter(r=>{
+    if(pv&&r.prov!==pv)return false;
+    if(dv&&!r.dist.includes(dv))return false;
+    if(showCQ&&!r.comrades)return false;
+    if(dy){
+      const days=Math.round((parseDate(r.date,r.year)-today)/86400000);
+      if(dy==='past'){if(days>=0)return false;}
+      else{const n=parseInt(dy);if(days<0||days>n)return false;}
+    }
+    return true;
+  });
+}
+
+function render(){
+  const fr=getFiltered();
+  const tbody=document.getElementById('tbody');
+  const noRes=document.getElementById('noRes');
+  if(!fr.length){tbody.innerHTML='';noRes.style.display='';updateStats(fr);return;}
+  noRes.style.display='none';
+  let html='';let lastM='';let num=1;
+  fr.forEach(r=>{
+    const m=r.date.split(' ')[2];
+    if(m!==lastM){html+=`<tr class="mhdr"><td colspan="10">📅 ${m} ${r.year}</td></tr>`;lastM=m;}
+    const db=r.dist.map(d=>`<span class="dbadge d${d}">${d}km</span>`).join('');
+    const ct=r.comrades?'<span class="ct">⭐CQ</span>':'';
+    const cls=r.comrades?'class="cq-row"':'';
+    const tc=calcTrip(r);
+    html+=`<tr ${cls} onclick="openModal('${r.id}')">
+      <td>${num++}</td><td><strong>${r.date}</strong></td>
+      <td class="rname">${r.race}${ct}${(raceStatuses[r.id]||{}).status==='confirmed'?'<span style="color:#1b5e20;font-size:10px;margin-left:3px">&#x2705;</span>':(raceStatuses[r.id]||{}).status==='cancelled'?'<span style="color:#c62828;font-size:10px;margin-left:3px">&#x274C;</span>':''}</td>
+      <td><span class="pb ${PC[r.prov]}">${PL[r.prov]}</span></td>
+      <td>${db}</td>
+      <td><span class="dc d${r.diff}"></span>${DL[r.diff]}</td>
+      <td>${r.loop}</td>
+      <td>${r.km}km</td>
+      <td>${daysHtml(r.date,r.year)}</td>
+      <td style="font-weight:700;color:#1a237e">~R${tc.total.toLocaleString()}</td>
+    </tr>`;
+  });
+  tbody.innerHTML=html;
+  updateStats(fr);
+}
+
+function updateStats(fr){
+  const t=fr.length,m42=fr.filter(r=>r.dist.includes('42')).length,m21=fr.filter(r=>r.dist.includes('21')&&!r.dist.includes('42')).length,cq=fr.filter(r=>r.comrades).length;
+  const today=new Date();today.setHours(0,0,0,0);
+  const up=fr.filter(r=>parseDate(r.date,r.year)>=today);
+  const nx=up.length?up.reduce((a,b)=>parseDate(a.date,a.year)<parseDate(b.date,b.year)?a:b):null;
+  document.getElementById('statsBar').innerHTML=`
+    <div><span class="stat-val">${t}</span> races</div>
+    <div><span class="stat-val">${m42}</span> marathons</div>
+    <div><span class="stat-val">${m21}</span> halfs</div>
+    <div class="stat-cq"><span class="stat-val stat-cq">${cq}</span> CQ qualifiers</div>
+    ${nx?`<div>Next: <strong>${nx.city}</strong> in ${daysHtml(nx.date,nx.year)}</div>`:''}
+  `;
+}
+
+function openModal(id){
+  const r=races.find(x=>x.id===id);if(!r)return;
+  const inPlan=myPlan.includes(id);
+  const tc=calcTrip(r);
+  document.getElementById('mTitle').textContent=r.race;
+  document.getElementById('mMeta').innerHTML=`
+    <span class="pb ${PC[r.prov]}">${PL[r.prov]}</span>
+    ${r.dist.map(d=>`<span class="dbadge d${d}">${d}km</span>`).join('')}
+    ${r.comrades?'<span style="background:#1b5e20;color:#fff;padding:2px 8px;border-radius:8px;font-size:11px;font-weight:700">⭐ Comrades Qualifier</span>':''}
+    ${r.km>500?'<span style="background:#fce4ec;color:#880e4f;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:700">✈ Flight needed</span>':''}
+    <span style="font-size:12px;opacity:.8">${r.date} · ${daysHtml(r.date,r.year)}</span>
+  `;
+  const fee42=r.fee42n?'R'+r.fee42n+(r.feeEst?' *':''):'—';
+  const fee21=r.fee21n?'R'+r.fee21n+(r.feeEst?' *':''):'—';
+  const infoRows=[
+    ['Date',r.date],['Location',r.location],['Distance(s)',r.dist.map(d=>d+'km').join(', ')],
+    ['From Mhlambanyatsi',r.km+'km (~'+Math.round(r.km/90)+'h drive)'],
+    ['Entry Fee (42km)',fee42],['Entry Fee (21km)',fee21],
+    ['Elevation Gain',r.elev+'m *'],['Loop Type',r.loop+' — '+r.loopNote]
+  ].map(([k,v])=>`<div class="ir"><span class="ik">${k}</span><span class="iv">${v}</span></div>`).join('');
+
+  const c=r.coach;
+  const coachHtml=c?`<div class="coach-sec">
+<h3>🏃 Coach's Analysis — ${starsHtml(c.stars)}</h3>
+<div class="cgrid">
+<div class="ci"><div class="cil">Suitability</div><div class="civ">${starsHtml(c.stars)} (${c.stars}/5)</div></div>
+<div class="ci"><div class="cil">Phase Gate</div><div class="civ"><span class="ph-badge">${c.phase}</span></div></div>
+<div class="ci"><div class="cil">Heel Risk</div><div class="civ">${heelHtml(c.heelRisk)}</div></div>
+<div class="ci"><div class="cil">Qualifier Verdict</div><div class="civ">${qualHtml(c.qualifier)}</div></div>
+</div>
+<div class="hl"><div class="hll">📋 The Take</div>${c.take}</div>
+<div class="wo"><div class="wol">⚠️ Watch Out</div>${c.watchOut}</div>
+<div class="fq"><div class="fql">💬 Fordyce Says</div><div class="fqt">"${c.fordyce}"</div></div>
+<div class="pn"><div class="pnl">🎯 Pacing Note</div>${c.pacing}</div>
+</div>`:'';
+
+  let tripItems;
+  if(tc.isFlight){
+    const s=getSettings();
+    tripItems=[
+      ['⛽ Fuel — drive to/from OR Tambo (840km × '+s.cons+'L/100km × R'+s.fuel+')','R'+tc.fuelORT.toLocaleString()],
+      ['🅿 OR Tambo parking (~4 days)','R'+tc.parking.toLocaleString()],
+      ['✈ Return flights OR Tambo ↔ Cape Town','R'+tc.flights.toLocaleString()],
+      ['🛏 Accommodation Cape Town (4 nights × R'+s.acc+')','R'+tc.acc.toLocaleString()],
+      ['🍽 Meals (5 days × 3 × R'+s.meal+')','R'+tc.meals.toLocaleString()],
+      ['🚗 Uber / transfers in Cape Town','R'+tc.transfers.toLocaleString()],
+      ['🥤 Race nutrition / gels','R'+tc.nutr.toLocaleString()],
+      ['🏁 Entry fee','R'+tc.entry.toLocaleString()],
+      ['━ TOTAL ESTIMATED TRIP COST','R'+tc.total.toLocaleString()]
+    ];
+  } else {
+    const s=getSettings();
+    tripItems=[
+      ['⛽ Fuel ('+r.km*2+'km × '+s.cons+'L/100km × R'+s.fuel+')','R'+tc.fuel.toLocaleString()],
+      ['🛣 Tolls (return)','R'+tc.tolls.toLocaleString()],
+      ['🛏 Accommodation (1 night, Sat)','R'+tc.acc.toLocaleString()],
+      ['🍽 Meals (2 days × 3 × R'+s.meal+')','R'+tc.meals.toLocaleString()],
+      ['🥤 Race nutrition / gels','R'+tc.nutr.toLocaleString()],
+      ['🏁 Entry fee','R'+tc.entry.toLocaleString()],
+      ['━ TOTAL ESTIMATED TRIP COST','R'+tc.total.toLocaleString()]
+    ];
+  }
+  const tripRows=tripItems.map(([k,v],i)=>`<div class="trip-line" ${i===tripItems.length-1?'style="font-weight:700;font-size:14px;color:#c62828;padding-top:8px"':''}><span>${k}</span><span>${v}</span></div>`).join('');
+
+  document.getElementById('mBody').innerHTML=`
+<div class="mgrid">
+<div class="msec"><h3>📋 Race Info</h3>${infoRows}</div>
+<div class="msec"><h3>🗓 Countdown & Quick Facts</h3>
+<div style="text-align:center;padding:16px 0">${daysHtml(r.date,r.year)}<div style="font-size:12px;color:#666;margin-top:6px">${r.date}</div></div>
+<div class="ir"><span class="ik">Province</span><span class="iv"><span class="pb ${PC[r.prov]}">${PL[r.prov]}</span></span></div>
+<div class="ir"><span class="ik">Comrades Qualifier</span><span class="iv">${r.comrades?'<span style="color:#1b5e20;font-weight:700">✅ Yes</span>':'<span style="color:#666">No</span>'}</span></div>
+<div class="ir"><span class="ik">In My Plan</span><span class="iv">${inPlan?'<span style="color:#1b5e20;font-weight:700">✅ Added</span>':'<span style="color:#aaa">Not added</span>'}</span></div>
+</div>
+${coachHtml}
+<div class="trip-sec"><h3>${tc.isFlight?'✈ Cape Town Trip':'🚗 Trip Itinerary'} & Cost Estimate</h3>
+${tripEtaHtml(r)}
+${tripRows}
+<div class="trip-total">Total: R${tc.total.toLocaleString()}</div>
+</div>
+</div>
+<p style="font-size:11px;color:#aaa;margin-top:10px">* Estimates only. Verify entry fees with organiser. Fuel price adjustable in Trip Settings. Toll estimates are approximate for routes from Mhlambanyatsi via Oshoek border.</p>
+`;
+
+  const rs=raceStatuses[id]||{status:'unverified'};
+  const statusCls=rs.status==='confirmed'?'mbtn-ok':rs.status==='cancelled'?'mbtn-cancel':'mbtn-warn';
+  const statusLabel=rs.status==='confirmed'?'Race Confirmed':rs.status==='cancelled'?'Cancelled':'Verify Race';
+  const statusIcon=rs.status==='confirmed'?'✅':rs.status==='cancelled'?'❌':'⚠️';
+  const statusNext=rs.status==='confirmed'?'cancelled':rs.status==='cancelled'?'unverified':'confirmed';
+  const lastChk=rs.last_checked?new Date(rs.last_checked).toLocaleDateString('en-ZA'):'Never';
+  document.getElementById('mFooter').innerHTML=`
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%">
+<button class="plan-btn ${inPlan?'added':''}" id="planToggleBtn" onclick="togglePlan('${id}')">${inPlan?'❌ Remove from Plan':'✅ Add to My Plan'}</button>
+${r.url?`<a href="${r.url}" target="_blank" class="mbtn mbtn-p" onclick="markRaceChecked('${id}')">🎟 Enter / Race Site</a>`:'<span style="font-size:11px;color:#aaa">No entry URL on file</span>'}
+<button class="mbtn ${statusCls}" onclick="cycleRaceStatus('${id}','${statusNext}')">${statusIcon} ${statusLabel}</button>
+<span style="font-size:10px;color:#aaa">verified: ${lastChk}</span>
+<button class="mbtn mbtn-c" onclick="closeModal()" style="margin-left:auto">✕ Close</button>
+</div>
+`;
+
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeModal(){document.getElementById('overlay').classList.remove('open');}
+function closeOverlay(e){if(e.target===document.getElementById('overlay'))closeModal();}
+
+async function cycleRaceStatus(id,next){
+  const data={race_id:id,status:next,last_checked:new Date().toISOString(),notes:''};
+  raceStatuses[id]=data;
+  try{await dbSaveStatus(data);}catch(e){console.warn('Status save failed',e);}
+  render();openModal(id);
+}
+async function markRaceChecked(id){
+  const cur=raceStatuses[id]||{status:'unverified'};
+  if(cur.status!=='confirmed'){
+    const data={race_id:id,status:'unverified',last_checked:new Date().toISOString(),notes:'website visited'};
+    raceStatuses[id]=data;
+    try{await dbSaveStatus(data);}catch(e){}
+    render();
+  }
+}
+
+async function togglePlan(id){
+  const idx=myPlan.indexOf(id);
+  if(idx>-1){
+    myPlan.splice(idx,1);
+    try{await dbDeletePlan(id);}catch(e){console.warn('Plan delete failed',e);}
+  }else{
+    myPlan.push(id);
+    const r=races.find(x=>x.id===id);
+    if(r){const dt=parseDate(r.date,r.year);try{await dbSavePlan(id,r,dt.toISOString().split('T')[0]);}catch(e){console.warn('Plan save failed',e);}}
+  }
+  localStorage.setItem('racePlan',JSON.stringify(myPlan));
+  document.getElementById('planCount').textContent=myPlan.length;
+  const inPlan=myPlan.includes(id);
+  const btn=document.getElementById('planToggleBtn');
+  if(btn){btn.textContent=inPlan?'❌ Remove from Plan':'✅ Add to My Plan';btn.className='plan-btn '+(inPlan?'added':'');}
+  renderPlan();
+}
+
+function renderPlan(){
+  const body=document.getElementById('planBody');
+  const sum=document.getElementById('planSummary');
+  if(!myPlan.length){
+    body.innerHTML='<div class="empty-plan"><span>📋</span>No races selected yet.<br>Go to the Race Calendar and click a race to add it to your plan.</div>';
+    document.getElementById('planTotal').textContent='R0';
+    document.querySelector('.plan-sub').textContent='Estimated total race budget — 0 races selected';
+    return;
+  }
+  let total=0;
+  let html='';
+  myPlan.forEach(id=>{
+    const r=races.find(x=>x.id===id);if(!r)return;
+    const tc=calcTrip(r);total+=tc.total;
+    html+=`<div class="plan-race-card">
+<div class="prc-header">
+<div><div class="prc-title">${r.race}</div><div class="prc-date">${r.date} · ${PL[r.prov]} · ${r.km}km from home · ${daysHtml(r.date,r.year)}</div></div>
+<button class="remove-btn" onclick="togglePlan('${id}');renderPlan()">✕ Remove</button>
+</div>
+<div class="prc-cost-grid">
+${tc.isFlight?`<div class="cost-item"><div class="cost-item-label">⛽ Fuel (to ORT)</div><div class="cost-item-val">R${tc.fuelORT.toLocaleString()}</div></div><div class="cost-item"><div class="cost-item-label">✈ Flights return</div><div class="cost-item-val">R${tc.flights.toLocaleString()}</div></div><div class="cost-item"><div class="cost-item-label">🅿 ORT Parking</div><div class="cost-item-val">R${tc.parking.toLocaleString()}</div></div><div class="cost-item"><div class="cost-item-label">🚗 CT Transfers</div><div class="cost-item-val">R${tc.transfers.toLocaleString()}</div></div>`:`<div class="cost-item"><div class="cost-item-label">⛽ Fuel</div><div class="cost-item-val">R${tc.fuel.toLocaleString()}</div></div><div class="cost-item"><div class="cost-item-label">🛣 Tolls</div><div class="cost-item-val">R${tc.tolls.toLocaleString()}</div></div>`}
+<div class="cost-item"><div class="cost-item-label">🛏 Accommodation</div><div class="cost-item-val">R${tc.acc.toLocaleString()}</div></div>
+<div class="cost-item"><div class="cost-item-label">🍽 Meals</div><div class="cost-item-val">R${tc.meals.toLocaleString()}</div></div>
+<div class="cost-item"><div class="cost-item-label">🏁 Entry Fee</div><div class="cost-item-val">R${tc.entry.toLocaleString()}</div></div>
+<div class="cost-item"><div class="cost-item-label">🥤 Nutrition</div><div class="cost-item-val">R${tc.nutr.toLocaleString()}</div></div>
+</div>
+<div class="cost-total-row">Trip Total: R${tc.total.toLocaleString()}</div>
+<div style="margin-top:10px;padding-top:10px;border-top:1px solid #edf0f5">
+<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:6px">
+  <span style="font-size:12px;font-weight:700;color:#1a237e">📋 Training Plan · ${daysUntil(r.date,r.year)} days out</span>
+  <button class="tp-toggle" onclick="togglePlanCalendar('${id}')">Hide/Show</button>
+</div>
+<div id="tp-${id}" class="tp-wrap"></div>
+</div>
+</div>`;
+  });
+  body.innerHTML=html;
+  document.getElementById('planTotal').textContent='R'+total.toLocaleString();
+  document.querySelector('.plan-sub').textContent=`Estimated total race budget — ${myPlan.length} race${myPlan.length>1?'s':''} selected`;
+  // Auto-render training plans for all plan races
+  myPlan.forEach(pid=>{ try{ renderTrainingPlan(pid); }catch(e){ console.warn('Plan render failed',pid,e); } });
+}
+
+function renderDiff(){
+  const cards=races.filter(r=>r.dist.includes('42')).sort((a,b)=>a.diff-b.diff||(a.elev-b.elev));
+  let html='';
+  cards.forEach(r=>{
+    const pct=Math.min(100,Math.round((r.elev/1000)*100));
+    html+=`<div class="dc-card dcc-d${r.diff}" onclick="openModal('${r.id}')">
+<h4>${r.race}</h4>
+<div class="dc-meta"><span class="pb ${PC[r.prov]}">${PL[r.prov]}</span> · ${r.date} · ${r.km}km · ${daysHtml(r.date,r.year)}</div>
+<div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${DC[r.diff]}"></div></div>
+<div class="dc-stats">
+<span>⛰ ${r.elev}m *</span>
+<span>🔄 ${r.loop}</span>
+${r.comrades?'<span style="color:#1b5e20;font-weight:700">⭐ CQ</span>':''}
+${r.coach?'<span>Coach: '+'⭐'.repeat(r.coach.stars)+'</span>':''}
+</div>
+</div>`;
+  });
+  document.getElementById('diffCards').innerHTML=html;
+}
+
+// ═══════════════════════════════════
+// TRAINING LOG
+// ═══════════════════════════════════
+// MET values per activity (adjusted by RPE)
+const MET_BASE={run:9,cycle:7,weights:4,squash:8,walk:4,swim:7,recovery:2.5};
+function calcCalories(){
+  const act=document.getElementById('lAct').value;
+  const min=parseFloat(document.getElementById('lMin').value)||0;
+  const rpe=parseInt(document.getElementById('lRPE').value)||5;
+  const wt=parseFloat(document.getElementById('lWt').value)||0;
+  // Use latest logged weight if field empty
+  const bodyWt=wt||((trainingLog.find(e=>e.wt>0)||{}).wt)||130;
+  const env=document.getElementById('lEnv')?.value||'';
+  if(!min||!act){return;}
+  let met=MET_BASE[act]||5;
+  // Adjust MET by RPE (1-10 scale: base RPE=5)
+  met=met+(rpe-5)*0.4;
+  // Treadmill slightly lower than road (-0.5 MET)
+  if(env==='treadmill')met-=0.5;
+  // Indoor cycling slightly lower
+  if(env==='indoor')met-=0.8;
+  met=Math.max(1,met);
+  const kcal=Math.round(met*bodyWt*(min/60));
+  const calField=document.getElementById('lCal');
+  if(calField&&!calField.dataset.manual)calField.value=kcal;
+}
+function updateLogFields(){
+  const act=document.getElementById('lAct').value;
+  const envSel=document.getElementById('lEnv');
+  // Environment options per activity
+  const envMap={
+    run:['road:🛣️ Road','treadmill:🏟️ Treadmill'],
+    cycle:['outdoor:🌳 Outdoor Ride','indoor:🏠 Indoor / Trainer'],
+    weights:['gym:🏋️ Gym','home:🏡 Home'],
+    squash:['indoor:🏟️ Indoor Court','outdoor:☀️ Outdoor'],
+    walk:['outdoor:🌳 Outdoor','treadmill:🏟️ Treadmill'],
+    swim:['pool:🏊 Pool','open:🌊 Open Water'],
+    recovery:['indoor:🏠 Indoor','outdoor:🌳 Outdoor']
+  };
+  const opts=envMap[act]||['outdoor:Outdoor','indoor:Indoor'];
+  envSel.innerHTML=opts.map(o=>{const[v,l]=o.split(':');return`<option value="${v}">${l}</option>`;}).join('');
+  // Show/hide contextual fields
+  const isRun=act==='run'||act==='walk';
+  const isCycle=act==='cycle';
+  const isWeights=act==='weights';
+  document.getElementById('fKm').style.display=(isRun||isCycle)?'':'none';
+  document.getElementById('fHR').style.display=(isRun||isCycle||act==='squash')?'':'none';
+  document.getElementById('fHeel1').style.display=isRun?'':'none';
+  document.getElementById('fHeel2').style.display=isRun?'':'none';
+  document.getElementById('fMg').style.display=isWeights?'':'none';
+  document.getElementById('fEnv').style.display='';
+  calcCalories();
+}
+async function logEntry(){
+  const d=document.getElementById('lDate').value;
+  const act=document.getElementById('lAct').value;
+  const env=document.getElementById('lEnv')?.value||'';
+  const mg=document.getElementById('lMg')?.value||'';
+  const km=parseFloat(document.getElementById('lKm').value)||0;
+  const min=parseInt(document.getElementById('lMin').value)||0;
+  const hr=parseInt(document.getElementById('lHR').value)||0;
+  const rpe=parseInt(document.getElementById('lRPE').value)||0;
+  const hb=parseInt(document.getElementById('lHB').value)||0;
+  const ha=parseInt(document.getElementById('lHA').value)||0;
+  const wt=parseFloat(document.getElementById('lWt').value)||0;
+  const cal=parseInt(document.getElementById('lCal').value)||0;
+  const notes=document.getElementById('lNotes').value;
+  if(!d||!act){alert('Please fill in date and activity type.');return;}
+  const entry={id:Date.now(),date:d,act,env:env||null,mg:mg||null,km:km||null,min:min||null,hr:hr||null,rpe:rpe||null,hb:hb||null,ha:ha||null,wt:wt||null,cal:cal||null,notes:notes||null};
+  trainingLog.unshift(entry);
+  localStorage.setItem('trainingLog',JSON.stringify(trainingLog));
+  document.getElementById('lKm').value='';document.getElementById('lMin').value='';document.getElementById('lHR').value='';document.getElementById('lRPE').value='';document.getElementById('lHB').value='';document.getElementById('lHA').value='';document.getElementById('lNotes').value='';document.getElementById('lCal').value='';delete document.getElementById('lCal').dataset.manual;
+  renderLog();
+  try{
+    await dbSaveLog(entry);
+    const el=document.getElementById('syncStatus');if(el){el.textContent='saved';setTimeout(()=>{el.textContent='';},2000);}
+  }catch(e){const el=document.getElementById('syncStatus');if(el)el.textContent='saved locally';console.warn('Log save failed',e);}
+}
+
+async function deleteLog(id){
+  trainingLog=trainingLog.filter(e=>e.id!==id);
+  localStorage.setItem('trainingLog',JSON.stringify(trainingLog));
+  renderLog();
+  try{await dbDeleteLog(id);}catch(e){console.warn('Log delete failed',e);}
+}
+
+const ENV_LABEL={road:'🛣️ Road',treadmill:'🏟️ Treadmill',outdoor:'🌳 Outdoor',indoor:'🏠 Indoor',gym:'🏋️ Gym',home:'🏡 Home',pool:'🏊 Pool',open:'🌊 Open Water'};
+const MG_LABEL={push:'Push',pull:'Pull',legs:'Legs',fullbody:'Full Body',core:'Core',upper:'Upper',lower:'Lower'};
+const HEEL_CLR=['#1b5e20','#1b5e20','#33691e','#f9a825','#f57c00','#e65100','#c62828','#b71c1c','#880e4f','#880e4f','#880e4f'];
+
+function renderLog(){
+  const today=new Date();today.setHours(0,0,0,0);
+  const w7=new Date(today.getTime()-7*86400000);
+  const w28=new Date(today.getTime()-28*86400000);
+  const week=trainingLog.filter(e=>new Date(e.date)>=w7);
+  const month=trainingLog.filter(e=>new Date(e.date)>=w28);
+  const weekKm=week.filter(e=>e.act==='run'||e.act==='walk').reduce((a,b)=>a+b.km,0);
+  const weekMin=week.reduce((a,b)=>a+b.min,0);
+  const weekDays=new Set(week.map(e=>e.date)).size;
+  const latestWt=trainingLog.find(e=>e.wt>0);
+  const firstWt=trainingLog.filter(e=>e.wt>0).slice(-1)[0];
+  const wtDelta=latestWt&&firstWt&&latestWt.id!==firstWt.id?((latestWt.wt-firstWt.wt).toFixed(1)):'—';
+
+  document.getElementById('logSummary').innerHTML=`
+<div class="ls-card"><div class="ls-val">${weekKm.toFixed(1)}</div><div class="ls-label">km this week</div></div>
+<div class="ls-card"><div class="ls-val">${weekMin<60?weekMin+"m":Math.floor(weekMin/60)+"h"+(weekMin%60?""+weekMin%60+"m":"")}</div><div class="ls-label">Training time (7d)</div></div>
+<div class="ls-card"><div class="ls-val">${weekDays}</div><div class="ls-label">Sessions this week</div></div>
+<div class="ls-card"><div class="ls-val" style="color:#e65100">${week.reduce((a,b)=>a+(b.cal||0),0).toLocaleString()}</div><div class="ls-label">🔥 kcal this week</div></div>
+<div class="ls-card"><div class="ls-val" style="color:${latestWt&&latestWt.wt<=100?'#1b5e20':'#1565c0'}">${latestWt?latestWt.wt+'kg':'—'}</div><div class="ls-label">Latest weight</div></div>
+<div class="ls-card"><div class="ls-val" style="color:${parseFloat(wtDelta)<0?'#1b5e20':'#c62828'}">${wtDelta==='—'?'—':(parseFloat(wtDelta)<0?'':'+')+(wtDelta)+'kg'}</div><div class="ls-label">Total weight change</div></div>
+<div class="ls-card"><div class="ls-val">${trainingLog.length}</div><div class="ls-label">Total sessions</div></div>
+`;
+
+  if(!trainingLog.length){
+    document.getElementById('logList').innerHTML='<p style="text-align:center;color:#aaa;padding:20px">No sessions logged yet. Add your first session above!</p>';
+    document.getElementById('trendsWrap').innerHTML='';
+    return;
+  }
+  let html='';
+  trainingLog.slice(0,60).forEach(e=>{
+    const dets=[];
+    if(e.env)dets.push(ENV_LABEL[e.env]||e.env);
+    if(e.km)dets.push(e.km+'km');
+    if(e.min)dets.push(e.min+'min');
+    if(e.hr)dets.push(e.hr+' bpm');
+    if(e.rpe)dets.push('RPE '+e.rpe+'/10');
+    if(e.cal)dets.push('🔥'+e.cal+'kcal');
+    if(e.mg)dets.push(MG_LABEL[e.mg]||e.mg);
+    const heelTag=(e.hb||e.ha)?`<span style="background:${HEEL_CLR[Math.max(e.hb||0,e.ha||0)]||'#aaa'};color:#fff;padding:1px 6px;border-radius:7px;font-size:10px;font-weight:700;margin-left:4px">Heel ${e.hb||0}→${e.ha||0}</span>`:'';
+    const wtTag=e.wt?`<span class="weight-tag">${e.wt}kg</span>`:'';
+    html+=`<div class="log-entry">
+<div class="log-icon">${ACT_ICON[e.act]||'🏃'}</div>
+<div class="log-info">
+<div class="log-title">${ACT_LABEL[e.act]||e.act} ${wtTag}${heelTag}</div>
+<div class="log-meta">${e.date} · ${dets.join(' · ')}${e.notes?' · <em>'+e.notes.substring(0,55)+'</em>':''}</div>
+</div>
+<button class="log-del" onclick="deleteLog(${e.id})">✕</button>
+</div>`;
+  });
+  document.getElementById('logList').innerHTML=html;
+  renderTrends(month);
+}
+
+function renderTrends(month){
+  if(trainingLog.length<3){document.getElementById('trendsWrap').innerHTML='';return;}
+  // Running env split
+  const runs=trainingLog.filter(e=>e.act==='run');
+  const roadRuns=runs.filter(e=>e.env==='road');
+  const millRuns=runs.filter(e=>e.env==='treadmill');
+  const roadKm=roadRuns.reduce((a,b)=>a+b.km,0);
+  const millKm=millRuns.reduce((a,b)=>a+b.km,0);
+  const totalRunKm=roadKm+millKm;
+  // Cycling split
+  const cycles=trainingLog.filter(e=>e.act==='cycle');
+  const outdoorCyc=cycles.filter(e=>e.env==='outdoor');
+  const indoorCyc=cycles.filter(e=>e.env==='indoor');
+  // Weights muscle groups
+  const wts=trainingLog.filter(e=>e.act==='weights');
+  const mgCounts={};wts.forEach(e=>{if(e.mg)mgCounts[e.mg]=(mgCounts[e.mg]||0)+1;});
+  // Heel trend
+  const heelRuns=runs.filter(e=>e.ha>0);
+  const recentHeel=heelRuns.slice(0,5).reduce((a,b)=>a+b.ha,0)/Math.max(1,Math.min(5,heelRuns.length));
+  const allHeel=heelRuns.reduce((a,b)=>a+b.ha,0)/Math.max(1,heelRuns.length);
+  const heelTrend=heelRuns.length>=3?(recentHeel<allHeel-0.3?'📉 Improving':'📈 Watch this'):'—';
+  // HR efficiency (runs with HR in Zone 2)
+  const z2runs=runs.filter(e=>e.hr>=106&&e.hr<=124);
+  const z2pct=runs.length?Math.round((z2runs.length/runs.length)*100):0;
+  // Avg pace for road vs treadmill
+  const roadPace=roadRuns.filter(e=>e.km>0&&e.min>0).map(e=>e.min/e.km);
+  const millPace=millRuns.filter(e=>e.km>0&&e.min>0).map(e=>e.min/e.km);
+  const avgRoadPace=roadPace.length?roadPace.reduce((a,b)=>a+b,0)/roadPace.length:0;
+  const avgMillPace=millPace.length?millPace.reduce((a,b)=>a+b,0)/millPace.length:0;
+  function fmtPace(p){if(!p)return'—';const m=Math.floor(p);const s=Math.round((p-m)*60);return m+':'+(s<10?'0':'')+s+'/km';}
+  // Month activity type breakdown
+  const actBreak={};month.forEach(e=>{actBreak[e.act]=(actBreak[e.act]||0)+1;});
+  const actTotal=month.length||1;
+  const actBars=Object.entries(actBreak).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`
+<div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px"><span>${ACT_ICON[k]} ${ACT_LABEL[k]}</span><span>${v} sessions</span></div>
+<div style="background:#e8ecf5;border-radius:4px;height:7px"><div style="background:#1565c0;width:${Math.round(v/actTotal*100)}%;height:100%;border-radius:4px"></div></div></div>`).join('');
+  // Weight progress to target
+  const latestWt=trainingLog.find(e=>e.wt>0);
+  const wtToTarget=latestWt?(latestWt.wt-100).toFixed(1):'—';
+  const wtPct=latestWt?Math.min(100,Math.round(((130-latestWt.wt)/30)*100)):0;
+
+  document.getElementById('trendsWrap').innerHTML=`
+<div style="background:#fff;border-radius:10px;padding:16px;border:1px solid #e8ecf5;margin-bottom:10px">
+<h3 style="font-size:13px;font-weight:700;color:#1a237e;margin-bottom:14px">📈 Training Trends & Insights</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px">
+
+<div style="background:#f8f9ff;border-radius:8px;padding:12px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">🏃 Road vs Treadmill</div>
+${totalRunKm>0?`
+<div style="font-size:12px;margin-bottom:6px">Road: <strong>${roadKm.toFixed(1)}km</strong> (${roadRuns.length} runs) · Avg pace: <strong>${fmtPace(avgRoadPace)}</strong></div>
+<div style="font-size:12px;margin-bottom:8px">Treadmill: <strong>${millKm.toFixed(1)}km</strong> (${millRuns.length} runs) · Avg pace: <strong>${fmtPace(avgMillPace)}</strong></div>
+<div style="background:#e8ecf5;border-radius:4px;height:10px;overflow:hidden"><div style="background:#2e7d32;width:${totalRunKm?Math.round(roadKm/totalRunKm*100):0}%;height:100%;border-radius:4px;display:inline-block"></div><div style="background:#0277bd;width:${totalRunKm?Math.round(millKm/totalRunKm*100):0}%;height:100%;border-radius:0 4px 4px 0;display:inline-block"></div></div>
+<div style="font-size:10px;color:#666;margin-top:4px">🟢 Road &nbsp; 🔵 Treadmill</div>
+<div style="font-size:11px;color:#666;margin-top:6px;font-style:italic">Track: Road pace improving vs treadmill? As weight drops, road pace should close the gap.</div>`:'<div style="color:#aaa;font-size:12px">Log some runs to see this trend</div>'}
+</div>
+
+<div style="background:#f8f9ff;border-radius:8px;padding:12px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">🚴 Indoor vs Outdoor Cycling</div>
+${cycles.length>0?`
+<div style="font-size:12px;margin-bottom:6px">Outdoor: <strong>${outdoorCyc.length} sessions</strong> · ${outdoorCyc.reduce((a,b)=>a+b.km,0).toFixed(0)}km</div>
+<div style="font-size:12px;margin-bottom:8px">Indoor/Trainer: <strong>${indoorCyc.length} sessions</strong> · ${indoorCyc.reduce((a,b)=>a+b.min,0)} min</div>
+<div style="background:#e8ecf5;border-radius:4px;height:10px;overflow:hidden"><div style="background:#e65100;width:${cycles.length?Math.round(outdoorCyc.length/cycles.length*100):0}%;height:100%;border-radius:4px;display:inline-block"></div><div style="background:#fbc02d;width:${cycles.length?Math.round(indoorCyc.length/cycles.length*100):0}%;height:100%;border-radius:0 4px 4px 0;display:inline-block"></div></div>
+<div style="font-size:10px;color:#666;margin-top:4px">🟠 Outdoor &nbsp; 🟡 Indoor</div>
+<div style="font-size:11px;color:#666;margin-top:6px;font-style:italic">Track: Outdoor cycling builds real-world endurance. Indoor is great for recovery and Zone 2 precision.</div>`:'<div style="color:#aaa;font-size:12px">Log cycling sessions to see this trend</div>'}
+</div>
+
+<div style="background:#f8f9ff;border-radius:8px;padding:12px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">🦴 Heel Pain Trend</div>
+${heelRuns.length>0?`
+<div style="font-size:12px;margin-bottom:4px">All-time avg (after run): <strong>${allHeel.toFixed(1)}/10</strong></div>
+<div style="font-size:12px;margin-bottom:8px">Last 5 runs avg: <strong>${recentHeel.toFixed(1)}/10</strong> ${heelTrend}</div>
+<div style="background:#e8ecf5;border-radius:4px;height:10px;margin-bottom:6px;overflow:hidden"><div style="background:${HEEL_CLR[Math.round(recentHeel)]||'#aaa'};width:${Math.round(recentHeel*10)}%;height:100%;border-radius:4px"></div></div>
+<div style="font-size:11px;color:#666;font-style:italic">⚠️ Stop running if heel hits 4/10 or above. Target: below 2/10 consistently before increasing mileage.</div>`:'<div style="color:#aaa;font-size:12px">Log runs with heel pain scores to track recovery</div>'}
+</div>
+
+<div style="background:#f8f9ff;border-radius:8px;padding:12px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">❤️ Zone 2 Compliance</div>
+${runs.filter(e=>e.hr>0).length>0?`
+<div style="font-size:22px;font-weight:700;color:#1565c0;margin-bottom:4px">${z2pct}%</div>
+<div style="font-size:12px;margin-bottom:6px;color:#666">of runs in Zone 2 (106–124 bpm)</div>
+<div style="background:#e8ecf5;border-radius:4px;height:10px;margin-bottom:6px;overflow:hidden"><div style="background:${z2pct>=75?'#1b5e20':z2pct>=50?'#f9a825':'#c62828'};width:${z2pct}%;height:100%;border-radius:4px"></div></div>
+<div style="font-size:11px;color:#666;font-style:italic">Target: 80%+ in Zone 2 (Fordyce / 80-20 rule). Zone 2 = fat burning + aerobic base.</div>`:'<div style="color:#aaa;font-size:12px">Log runs with HR data to track Zone 2 compliance</div>'}
+</div>
+
+<div style="background:#f8f9ff;border-radius:8px;padding:12px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">🏋️ Weight Training Breakdown</div>
+${wts.length>0?`
+<div style="font-size:12px;margin-bottom:8px">${wts.length} weight sessions logged</div>
+${Object.entries(mgCounts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid #edf0f5"><span>${MG_LABEL[k]||k}</span><span style="font-weight:700">${v}x</span></div>`).join('')}
+<div style="font-size:11px;color:#666;margin-top:6px;font-style:italic">Track: Balance push/pull to protect shoulders. Legs/glutes directly support running economy.</div>`:'<div style="color:#aaa;font-size:12px">Log weight sessions to see muscle group balance</div>'}
+</div>
+
+<div style="background:#f8f9ff;border-radius:8px;padding:12px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">⚖️ Weight Progress (130 → 100kg)</div>
+${latestWt?`
+<div style="font-size:22px;font-weight:700;color:${latestWt.wt<=100?'#1b5e20':'#1565c0'};margin-bottom:4px">${latestWt.wt}kg</div>
+<div style="font-size:12px;color:#666;margin-bottom:6px">${wtToTarget}kg to target (100kg)</div>
+<div style="background:#e8ecf5;border-radius:4px;height:12px;overflow:hidden;margin-bottom:6px"><div style="background:linear-gradient(90deg,#1b5e20,#43a047);width:${wtPct}%;height:100%;border-radius:4px;transition:width .5s"></div></div>
+<div style="font-size:10px;color:#666">130kg ←${' '.repeat(20)}→ 100kg &nbsp; ${wtPct}% of journey complete</div>
+<div style="font-size:11px;color:#666;margin-top:6px;font-style:italic">Sustainable target: 0.5–1kg/week. Every 10kg lost = ~45 sec/km faster at Zone 2 effort.</div>`:'<div style="color:#aaa;font-size:12px">Log body weight to track progress</div>'}
+</div>
+
+<div style="background:#f8f9ff;border-radius:8px;padding:12px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">🔥 Calorie Burn Trend (28 days)</div>
+${(()=>{
+  // Group by week
+  const weeks={};
+  month.forEach(e=>{
+    if(!e.cal)return;
+    const d=new Date(e.date);
+    const wk=Math.floor((today-d)/604800000);
+    const wkLabel=['This week','Last week','2 weeks ago','3 weeks ago'][Math.min(wk,3)]||'4+ weeks ago';
+    weeks[wkLabel]=(weeks[wkLabel]||0)+e.cal;
+  });
+  const wkEntries=Object.entries(weeks).reverse();
+  if(!wkEntries.length)return'<div style="color:#aaa;font-size:12px">Log sessions with calories to see weekly burn</div>';
+  const maxCal=Math.max(...wkEntries.map(([,v])=>v));
+  const bars=wkEntries.map(([k,v])=>`<div style="margin-bottom:6px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px"><span>${k}</span><span style="font-weight:700;color:#e65100">${v.toLocaleString()} kcal</span></div><div style="background:#e8ecf5;border-radius:4px;height:8px"><div style="background:linear-gradient(90deg,#e65100,#ff8a50);width:${Math.round(v/maxCal*100)}%;height:100%;border-radius:4px"></div></div></div>`).join('');
+  const total=wkEntries.reduce((a,[,v])=>a+v,0);
+  const avgWk=Math.round(total/Math.max(1,wkEntries.length));
+  return bars+`<div style="font-size:11px;color:#666;margin-top:6px">Avg: <strong>${avgWk.toLocaleString()} kcal/week</strong> · Total 28d: <strong>${total.toLocaleString()} kcal</strong></div><div style="font-size:11px;color:#666;margin-top:4px;font-style:italic">Target: 2,500–3,500 kcal/week from training to support fat loss at current weight.</div>`;
+})()}
+</div>
+
+<div style="background:#f8f9ff;border-radius:8px;padding:12px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">📊 Last 28 Days Activity Mix</div>
+${month.length>0?actBars+'<div style="font-size:11px;color:#666;margin-top:6px;font-style:italic">Target: Run 3–4x/week · Weights 2x · Cycling 1–2x · Squash 1x</div>':'<div style="color:#aaa;font-size:12px">Log sessions to see your activity mix</div>'}
+</div>
+
+</div>
+</div>`;
+}
+
+
+// ══════════════════════════════════════════════════════════
+// RACE PREDICTOR — Riegel (k=1.07) + Daniels VO2max
+// ══════════════════════════════════════════════════════════
+function updatePredSrc(){
+  const isMill=document.getElementById('srcMill').checked;
+  document.getElementById('inclineRow').style.display=isMill?'':'none';
+  document.getElementById('p5minLabel').textContent=isMill?'5km Treadmill Time — Min':'5km Road Time — Minutes';
+  // Style active radio label
+  document.getElementById('lblRoad').style.borderColor=isMill?'#d0d6e8':'#1565c0';
+  document.getElementById('lblRoad').style.background=isMill?'':'#e8f0fe';
+  document.getElementById('lblMill').style.borderColor=isMill?'#f57c00':'#d0d6e8';
+  document.getElementById('lblMill').style.background=isMill?'#fff3e0':'';
+  runPredictor();
+}
+
+function treadmillToRoad(sec, incline){
+  // Research: at 0% incline treadmill ~1.5% easier than road (no wind resistance, belt assist)
+  // At 1% incline: physiologically equivalent to road
+  // Each additional 1% incline above 1% makes it ~3% harder than road equivalent
+  // So correction factors (multiply treadmill time to get road equivalent):
+  const factors={0:1.015, 1:1.000, 2:0.971, 3:0.943};
+  const f=factors[incline]||1.000;
+  return Math.round(sec*f);
+}
+
+function fmt(totalSec){
+  if(!totalSec||totalSec<=0)return'—';
+  const h=Math.floor(totalSec/3600);
+  const m=Math.floor((totalSec%3600)/60);
+  const s=Math.round(totalSec%60);
+  if(h>0)return h+'h '+String(m).padStart(2,'0')+'m '+String(s).padStart(2,'0')+'s';
+  return m+'m '+String(s).padStart(2,'0')+'s';
+}
+function fmtPaceStr(secPerKm){
+  if(!secPerKm)return'—';
+  const m=Math.floor(secPerKm/60);
+  const s=Math.round(secPerKm%60);
+  return m+':'+String(s).padStart(2,'0')+'/km';
+}
+function riegel(t1sec,d1,d2,k=1.07){
+  return t1sec*Math.pow(d2/d1,k);
+}
+function danielsVO2max(fiveKsec){
+  const T=fiveKsec/60; // minutes
+  const v=(5000/fiveKsec)*60; // m/min
+  const pct=0.8+0.1894393*Math.exp(-0.012778*T)+0.2989558*Math.exp(-0.1932605*T);
+  const vo2=-4.60+0.182258*v+0.000104*v*v;
+  return Math.round(vo2/pct*10)/10;
+}
+function vo2Category(vo2,age){
+  // Norms for men 40-49 (ACSM)
+  if(vo2>=50)return{label:'Superior',color:'#1b5e20'};
+  if(vo2>=45)return{label:'Excellent',color:'#2e7d32'};
+  if(vo2>=41)return{label:'Good',color:'#43a047'};
+  if(vo2>=37)return{label:'Average',color:'#f9a825'};
+  if(vo2>=33)return{label:'Below Average',color:'#f57c00'};
+  return{label:'Needs Work',color:'#c62828'};
+}
+// Daniels training paces relative to 5km pace (sec/km)
+function trainingZones(paceSecKm){
+  const easy=paceSecKm*1.33;
+  const long=paceSecKm*1.28;
+  const mp=paceSecKm*1.18;   // marathon pace
+  const thresh=paceSecKm*1.08;
+  const interval=paceSecKm;
+  const rep=paceSecKm*0.90;
+  return{easy,long,mp,thresh,interval,rep};
+}
+function runPredictor(){
+  const min=parseInt(document.getElementById('p5min').value)||0;
+  const sec=parseInt(document.getElementById('p5sec').value)||0;
+  const wt=parseFloat(document.getElementById('pWt').value)||
+    (trainingLog.find(e=>e.wt>0)||{}).wt||130;
+  if(!min&&!sec){
+    document.getElementById('predResults').style.display='none';
+    document.getElementById('predEmpty').style.display='';
+    return;
+  }
+  const isMill=document.getElementById('srcMill')?.checked;
+  const incline=isMill?parseInt(document.getElementById('pIncline')?.value||1):0;
+  const rawT5=min*60+sec;
+  if(rawT5<840||rawT5>3600){return;}
+  const t5=isMill?treadmillToRoad(rawT5,incline):rawT5;
+  const correctionNote=isMill?(incline===1
+    ?'<div style="font-size:11px;color:#1565c0;margin-bottom:8px">🏟️ Treadmill at 1% incline = road equivalent. No correction needed — predictions are accurate.</div>'
+    :`<div style="font-size:11px;color:#e65100;margin-bottom:8px">🏟️ Treadmill ${incline}% incline → road-equivalent 5km: <strong>${fmt(t5)}</strong> (adjusted from ${fmt(rawT5)})</div>`)
+    :'';
+  document.getElementById('predResults').style.display='';
+  document.getElementById('predEmpty').style.display='none';
+
+  // Predictions
+  const races=[
+    {label:'5 km',d:5,icon:'🏁'},
+    {label:'10 km',d:10,icon:'🏃'},
+    {label:'21.1 km (Half)',d:21.1,icon:'🥈'},
+    {label:'42.2 km (Marathon)',d:42.2,icon:'🥇',cq:true},
+    {label:'90 km (Comrades)',d:90,icon:'🏆'},
+  ];
+  const pace5=t5/5; // sec/km
+  const zones=trainingZones(pace5);
+
+  // Sub-5hr 42km target 5km time (reverse Riegel)
+  const target42sec=5*3600; // 5h in seconds
+  const target5km=target42sec*Math.pow(5/42.2,1.07);
+  const needsFaster=t5>target5km;
+
+  let tableRows='';
+  races.forEach(r=>{
+    const pred=r.d===5?t5:riegel(t5,5,r.d);
+    const paceKm=pred/(r.d);
+    const isTarget=r.cq;
+    const isCQ=r.cq&&pred<=target42sec;
+    const rowCls=isCQ?'cq-row-p':isTarget&&needsFaster?'target-row':'';
+    const sub5tag=r.cq?(pred<=target42sec?'<span style="color:#1b5e20;font-size:10px;font-weight:700"> ✅ CQ</span>':'<span style="color:#c62828;font-size:10px"> ❌ need faster</span>'):'';
+    tableRows+=`<tr class="${rowCls}">
+      <td>${r.icon} ${r.label}</td>
+      <td style="font-weight:700">${fmt(pred)}${sub5tag}</td>
+      <td>${fmtPaceStr(paceKm)}</td>
+    </tr>`;
+  });
+  document.getElementById('predTable').innerHTML=correctionNote+`
+<table class="pred-table">
+<thead><tr><th>Distance</th><th>Predicted Time</th><th>Avg Pace</th></tr></thead>
+<tbody>${tableRows}</tbody>
+</table>
+<p style="font-size:10px;color:#aaa;margin-top:6px">Riegel formula (k=1.07, calibrated for recreational runners). Assumes consistent training — predictions are targets, not guarantees.</p>`;
+
+  // VO2max
+  const vo2=danielsVO2max(t5);
+  const cat=vo2Category(vo2,43);
+  document.getElementById('predVo2').innerHTML=`
+<div style="margin-top:14px;padding:12px;background:#f8f9ff;border-radius:8px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Estimated VO2max (Daniels Formula)</div>
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+  <span style="font-size:28px;font-weight:800;color:${cat.color}">${vo2}</span>
+  <span style="font-size:12px;color:#666">ml/kg/min</span>
+  <span class="vo2-badge" style="background:${cat.color};color:#fff">${cat.label}</span>
+  <span style="font-size:11px;color:#888">(ACSM norms, male 40–49)</span>
+</div>
+<div style="margin-top:8px;font-size:11px;color:#666">
+  <strong>Context:</strong> VO2max improves significantly with consistent Zone 2 training. Every 10kg lost adds ~1.5–2 ml/kg/min. Target for sub-5hr marathon: VO2max ≥ ${danielsVO2max(Math.round(target5km)).toFixed(1)} ml/kg/min.
+</div>
+</div>`;
+
+  // Training zones
+  document.getElementById('predZones').innerHTML=`
+<div style="margin-top:12px;padding:12px;background:#f8f9ff;border-radius:8px;border:1px solid #e8ecf5">
+<div style="font-size:11px;font-weight:700;color:#455a7f;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px">Daniels Training Paces (from your 5km)</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px">
+${[
+  {name:'🟢 Easy / Recovery',pace:zones.easy,color:'#43a047',note:'Most of your runs (80%)'},
+  {name:'🔵 Long Run',pace:zones.long,color:'#1565c0',note:'Weekend long run pace'},
+  {name:'🟡 Marathon Pace',pace:zones.mp,color:'#f9a825',note:'Your Comrades qualifier target'},
+  {name:'🟠 Threshold',pace:zones.thresh,color:'#e65100',note:'Comfortably hard, 20–40min'},
+  {name:'🔴 Interval',pace:zones.interval,color:'#c62828',note:'5km race pace, 1–3min reps'},
+].map(z=>`<div style="background:#fff;border-radius:6px;padding:8px 10px;border:1px solid #e8ecf5">
+  <div style="font-size:11px;color:#455a7f;margin-bottom:2px">${z.name}</div>
+  <div style="font-size:16px;font-weight:700;color:${z.color}">${fmtPaceStr(z.pace)}</div>
+  <div style="font-size:10px;color:#888">${z.note}</div>
+</div>`).join('')}
+</div>
+<div style="font-size:11px;color:#666;margin-top:8px">💡 <strong>Zone 2 heart rate target (Matt):</strong> 106–124 bpm · Run your Easy/Long paces in this HR range.</div>
+</div>`;
+
+  // Sub-5hr progress
+  const pct=Math.min(100,Math.round(((target5km-t5<0?0:1-(t5-target5km)/(t5))*100)));
+  const minNeeded=Math.floor(target5km/60);
+  const secNeeded=Math.round(target5km%60);
+  const gapSec=Math.max(0,t5-target5km);
+  const gapMin=Math.floor(gapSec/60);
+  const gapSecR=Math.round(gapSec%60);
+  document.getElementById('predProgress').innerHTML=`
+<div class="pred-progress" style="margin-top:12px">
+<div style="font-size:11px;font-weight:700;color:#1b5e20;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px">🎯 Comrades Qualifier Progress (sub-5hr 42km)</div>
+<div style="font-size:12px;color:#333;margin-bottom:6px">
+  You need: <strong>${minNeeded}:${String(secNeeded).padStart(2,'0')} for 5km</strong> to predict a sub-5hr marathon.
+  ${t5>target5km
+    ?`You are <strong>${gapMin}m ${gapSecR}s</strong> per 5km off target. Every 10kg lost ≈ 90 sec faster on 5km pace.`
+    :'<span style="color:#1b5e20;font-weight:700">✅ You are on track for a sub-5hr qualifier!</span>'}
+</div>
+<div style="background:#c8e6c9;border-radius:4px;height:10px;overflow:hidden">
+  <div style="background:#2e7d32;width:${Math.min(100,Math.round((target5km/t5)*100))}%;height:100%;border-radius:4px;transition:width .5s"></div>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:10px;color:#555;margin-top:3px">
+  <span>Current 5km: ${fmt(t5)}</span><span>Target: ${fmt(Math.round(target5km))}</span>
+</div>
+</div>`;
+
+  // Auto-fill from best road run in training log
+  const roadRuns=trainingLog.filter(e=>e.act==='run'&&e.env==='road'&&e.km>=4&&e.min>0);
+  const millRuns=trainingLog.filter(e=>e.act==='run'&&e.env==='treadmill'&&e.km>=4&&e.min>0);
+  const hintEl=document.getElementById('predHint');
+  let hints=[];
+  if(roadRuns.length){
+    const best=roadRuns.reduce((a,b)=>((a.min/a.km)<(b.min/b.km)?a:b));
+    const pace=best.min/best.km*60;
+    const est=pace*5;
+    const m=Math.floor(est/60);const s=Math.round(est%60);
+    hints.push(`🛣️ Best road run: ${best.km}km @ ${fmtPaceStr(pace)} → est 5km <strong>${m}:${String(s).padStart(2,'0')}</strong>`);
+  }
+  if(millRuns.length){
+    const best=millRuns.reduce((a,b)=>((a.min/a.km)<(b.min/b.km)?a:b));
+    const pace=best.min/best.km*60;
+    const est=pace*5;
+    const roadEq=treadmillToRoad(est,1);
+    const m=Math.floor(est/60);const s=Math.round(est%60);
+    const mr=Math.floor(roadEq/60);const sr=Math.round(roadEq%60);
+    hints.push(`🏟️ Best treadmill run: ${best.km}km @ ${fmtPaceStr(pace)} → est 5km <strong>${m}:${String(s).padStart(2,'0')}</strong> (road equiv: ${mr}:${String(sr).padStart(2,'0')})`);
+  }
+  if(hints.length)hintEl.innerHTML='💡 From your training log: '+hints.join(' &nbsp;|&nbsp; ');
+}
+
+// Auto-fill weight from training log
+function initPredictor(){
+  const latestWt=(trainingLog.find(e=>e.wt>0)||{}).wt;
+  if(latestWt)document.getElementById('pWt').value=latestWt;
+  runPredictor();
+}
+
+
+// ══════════════════════════════════════════════════════════════
+// TRAINING PLAN GENERATOR
+// Backbone: Bruce Fordyce · Jack Daniels VDOT · Pete Pfitzinger
+// Phil Maffetone MAF · Matt Fitzgerald 80/20 · Matt Fitzgerald
+// Multi-sport: Run / Cycle / Row / Gym  |  No Sat, No Wed
+// ══════════════════════════════════════════════════════════════
+
+const storedPlans = JSON.parse(localStorage.getItem('trainingPlans') || '{}');
+let completedSessions = {};
+
+// Session type definitions
+const ST = {
+  longrun:  { icon:'🏃', label:'Long Run',        cls:'s-run',    sport:'run'     },
+  easyrun:  { icon:'🏃', label:'Easy Run',        cls:'s-run',    sport:'run'     },
+  temporun: { icon:'💨', label:'Tempo Run',       cls:'s-run',    sport:'run'     },
+  intervals:{ icon:'⚡', label:'Intervals',       cls:'s-run',    sport:'run'     },
+  mprun:    { icon:'🎯', label:'MP Run',          cls:'s-run',    sport:'run'     },
+  strides:  { icon:'🏃', label:'Easy + Strides',  cls:'s-run',    sport:'run'     },
+  cycle:    { icon:'🚴', label:'Cycling',         cls:'s-cycle',  sport:'cycle'   },
+  recycle:  { icon:'🚴', label:'Recovery Ride',   cls:'s-cycle',  sport:'cycle'   },
+  row:      { icon:'🚣', label:'Rowing',          cls:'s-row',    sport:'row'     },
+  gym_up:   { icon:'🏋️', label:'Gym – Upper',    cls:'s-weights',sport:'weights' },
+  gym_leg:  { icon:'🏋️', label:'Gym – Legs',     cls:'s-weights',sport:'weights' },
+  gym_full: { icon:'🏋️', label:'Gym – Full',     cls:'s-weights',sport:'weights' },
+  rest:     { icon:'😴', label:'Rest',            cls:'s-rest',   sport:'rest'    },
+  raceday:  { icon:'🏁', label:'RACE DAY',        cls:'s-race',   sport:'race'    },
+};
+
+// Weekly templates [day_offset, session_type, AM/PM, duration_min, detail_fn]
+// Days: 0=Sun, 1=Mon, 2=Tue, 4=Thu, 5=Fri  (no 3=Wed, no 6=Sat)
+function getWeekTemplate(phase, phaseWk, totalWks, wkIdx, is42, longKm, v5km){
+  const easy  = v5km ? fmtPaceStr(trainingZones(v5km*60).easy)  : 'comfortable';
+  const mp    = v5km ? fmtPaceStr(trainingZones(v5km*60).mp)    : 'marathon pace';
+  const thr   = v5km ? fmtPaceStr(trainingZones(v5km*60).thresh): 'threshold';
+  const intv  = v5km ? fmtPaceStr(v5km*60)                      : 'interval pace';
+
+  if(phase==='raceweek') return [
+    {d:0,slot:'AM',type:'easyrun',dur:40,  det:`8–10km easy shakeout. Fordyce: "Stay calm, trust your training." Legs only.`},
+    {d:1,slot:'',  type:'rest',   dur:0,   det:`Complete rest. Pack gear, check race briefing, hydrate.`},
+    {d:2,slot:'AM',type:'strides',dur:25,  det:`20min easy + 4×100m strides. Wake up the legs, keep it very light.`},
+    {d:4,slot:'AM',type:'easyrun',dur:20,  det:`15min jog only. Last run before race. Everything else from here is rest.`},
+    {d:5,slot:'',  type:'rest',   dur:0,   det:`Rest completely. Sleep early. Lay out race kit tonight.`},
+  ];
+
+  if(phase==='taper') return [
+    {d:0,slot:'AM',type:'longrun', dur: Math.max(60, Math.round(longKm*0.6)*6),
+      det:`${Math.round(longKm*0.65)}km at easy pace ${easy}. Taper: feel fresh, don\'t push. Fordyce: "Trust the taper."`},
+    {d:1,slot:'',  type:'recycle',dur:40,  det:`Easy recovery spin, Zone 1. Flush lactate, keep legs moving.`},
+    {d:2,slot:'AM',type:'mprun',  dur:35,  det:`8km with 3km at marathon pace ${mp}. Pfitzinger: "A few quality km in taper keeps edge sharp."`},
+    {d:2,slot:'PM',type:'gym_up', dur:40,  det:`Light upper body. No heavy legs in taper week.`},
+    {d:4,slot:'AM',type:'strides',dur:30,  det:`5km easy + 6×100m strides. Light, springy, confident.`},
+    {d:5,slot:'AM',type:'recycle',dur:45,  det:`Easy 45min spin. Active recovery only.`},
+  ];
+
+  if(phase==='peak') return [
+    {d:0,slot:'AM',type:'longrun', dur: Math.round(longKm*6.5),
+      det:`${longKm}km — last ${Math.round(longKm*0.3)}km at marathon pace ${mp}. Pfitzinger: race simulation. This is your biggest prep run.`},
+    {d:1,slot:'',  type:'recycle',dur:45,  det:`Recovery cycling. Spin out the long run legs. Zone 1 strictly.`},
+    {d:2,slot:'AM',type:'temporun',dur:50,  det:`5km easy warm-up + 3×8min threshold ${thr} (2min walk recover) + 5km cool. Daniels T-pace: "comfortably hard."`},
+    {d:2,slot:'PM',type:'gym_up', dur:45,  det:`Upper body — shoulders, back, core. Posture muscles that hold form at km 35+.`},
+    {d:4,slot:'AM',type:'intervals',dur:55,det:`3km warm-up + 5×1000m at ${intv} (90sec jog recover) + 2km cool. 80/20: this is your 20% quality work.`},
+    {d:4,slot:'PM',type:'row',    dur:25,  det:`25min rowing at moderate effort. Core, upper back, aerobic top-up. Maffetone: "Every aerobic minute counts."`},
+    {d:5,slot:'AM',type:'cycle',  dur:75,  det:`Zone 2 cycling, 75min. Fordyce: "The legs that win Comrades run thousands of km before race day."`},
+    {d:5,slot:'PM',type:'gym_leg',dur:40,  det:`Single-leg squats, hip thrusts, calf raises. Running economy work.`},
+  ];
+
+  if(phase==='build') return [
+    {d:0,slot:'AM',type:'longrun', dur: Math.round(longKm*5.8),
+      det:`${longKm}km easy then last 25% at marathon pace ${mp}. Fordyce: "The long run is where races are won." Keep it honest.`},
+    {d:1,slot:'',  type:'recycle',dur:45,  det:`45min recovery cycling, Zone 1. Mandatory recovery — Pfitzinger stresses this.`},
+    {d:2,slot:'AM',type:'temporun',dur:45,  det:`10min easy + 25min threshold ${thr} + 10min cool. Daniels: threshold improves lactate clearance, the key to holding marathon pace.`},
+    {d:2,slot:'PM',type:'gym_up', dur:45,  det:`Push (chest/shoulders/triceps) + pull (back/biceps). Balance prevents shoulder injury on long runs. No ego lifting.`},
+    {d:4,slot:'AM',type:'intervals',dur:55,det:`5min walk + 3km easy + 4×1km at ${intv} (90sec walk recover) + 2km cool. 80/20: this is your 20% intensity work for the week.`},
+    {d:4,slot:'PM',type:'row',    dur:30,  det:`30min rowing. Moderate effort. Builds core and upper body aerobic capacity without leg impact.`},
+    {d:5,slot:'AM',type:'cycle',  dur:70,  det:`70min Zone 2 cycling. Same heart rate as easy running — builds aerobic base without impact. Maffetone approves.`},
+    {d:5,slot:'PM',type:'gym_leg',dur:45,  det:`Leg press, hamstring curls, single-leg calf raises, glute bridges. Glutes = running engine. Stronger = faster.`},
+  ];
+
+  // Base phase (default)
+  return [
+    {d:0,slot:'AM',type:'longrun', dur: Math.round(longKm*5.5),
+      det:`${longKm}km entirely at easy pace ${easy}. Fordyce: "Go slower than you think. The long run builds your aerobic engine — don\'t race it." Keep HR 106–124 bpm.`},
+    {d:1,slot:'',  type:'recycle',dur:40,  det:`Easy recovery spin, 40min. Zone 1. Leg flush. Mandatory — Pfitzinger: recovery days are training days.`},
+    {d:2,slot:'AM',type:'easyrun', dur:45,  det:`45min easy run, Zone 2 strictly. Maffetone MAF: if HR drifts above 124, walk until it drops. No ego.`},
+    {d:2,slot:'PM',type:'gym_up', dur:45,  det:`Upper body strength. Push day: bench, shoulder press, lat pull. Posture = running economy. Keep weight moderate, reps 12–15.`},
+    {d:4,slot:'AM',type:'easyrun', dur:40,  det:`40min steady Zone 2 run. Conversational pace. Fordyce: "If you can\'t talk comfortably, you\'re running too fast."`},
+    {d:4,slot:'PM',type:'row',    dur:25,  det:`25min rowing, moderate. Zero impact cardio with core and upper body. Maffetone: aerobic work in any form builds the base.`},
+    {d:5,slot:'AM',type:'cycle',  dur:60,  det:`60min Zone 2 cycling. HR 106–124 same as running. Builds aerobic capacity, zero joint impact — ideal at current bodyweight.`},
+    {d:5,slot:'PM',type:'gym_leg',dur:45,  det:`Legs & core: squat, leg press, hip thrust, plank, dead bug. Glutes and hamstrings drive you forward. Core holds your form late in the race.`},
+  ];
+}
+
+function generateTrainingPlan(raceId){
+  const r = races.find(x=>x.id===raceId); if(!r) return null;
+  const today = new Date(); today.setHours(0,0,0,0);
+  const raceDate = parseDate(r.date, r.year);
+  const daysToRace = Math.round((raceDate - today)/86400000);
+  const totalWks = Math.floor(daysToRace/7);
+  if(totalWks < 1) return null;
+
+  // Phase allocation
+  let taper=Math.min(3, Math.max(1, Math.floor(totalWks*0.2)));
+  let peak =Math.min(3, Math.max(1, Math.floor(totalWks*0.15)));
+  let build=Math.min(8, Math.max(0, Math.floor((totalWks-taper-peak)*0.45)));
+  let base =Math.max(0, totalWks-taper-peak-build);
+  if(totalWks<=4){taper=totalWks;peak=build=base=0;}
+  else if(totalWks<=7){taper=2;peak=1;build=Math.max(1,totalWks-3);base=0;}
+
+  const phases=[
+    ...Array(base).fill('base'),
+    ...Array(build).fill('build'),
+    ...Array(peak).fill('peak'),
+    ...Array(taper).fill('taper'),
+  ];
+
+  // Find next Sunday
+  const planStart = new Date(today);
+  const dow = planStart.getDay();
+  if(dow!==0) planStart.setDate(planStart.getDate()+(7-dow));
+
+  const is42 = r.dist.includes('42');
+  const maxLong = is42?32:21;
+
+  // Get 5km pace from predictor if set
+  const p5m = parseInt(document.getElementById('p5min')?.value)||0;
+  const p5s = parseInt(document.getElementById('p5sec')?.value)||0;
+  const v5km = (p5m||p5s) ? ((p5m*60+p5s)/5/60) : null; // min/km
+
+  const weeks = [];
+  for(let w=0; w<totalWks; w++){
+    const phase = w < phases.length ? phases[w] : 'taper';
+    const phaseIdx = w < base ? w :
+                     w < base+build ? w-base :
+                     w < base+build+peak ? w-base-build : w-base-build-peak;
+    const isRaceWk = (w === totalWks-1);
+    const finalPhase = isRaceWk ? 'raceweek' : phase;
+
+    // Long run progression: start 12km, grow to maxLong by peak, reduce in taper
+    const progressPct = Math.min(1, w / Math.max(1, base+build));
+    let longKm;
+    if(finalPhase==='taper')      longKm = Math.max(14, Math.round(maxLong*0.65 - phaseIdx*3));
+    else if(finalPhase==='peak')  longKm = maxLong;
+    else if(finalPhase==='raceweek') longKm = 10;
+    else                          longKm = Math.round(12 + (maxLong-12)*progressPct);
+
+    const sundayDate = new Date(planStart);
+    sundayDate.setDate(planStart.getDate() + w*7);
+
+    const template = getWeekTemplate(finalPhase, phaseIdx+1, totalWks, w, is42, longKm, v5km);
+
+    // Build day sessions
+    const daySessions = {};
+    template.forEach(t=>{
+      const dayDate = new Date(sundayDate);
+      dayDate.setDate(sundayDate.getDate() + t.d);
+      const dkey = dayDate.toISOString().split('T')[0];
+      if(!daySessions[dkey]) daySessions[dkey]={date:dayDate, sessions:[]};
+      daySessions[dkey].sessions.push({...t});
+    });
+
+    // Add race day
+    if(isRaceWk){
+      const rk = raceDate.toISOString().split('T')[0];
+      if(!daySessions[rk]) daySessions[rk]={date:new Date(raceDate),sessions:[]};
+      daySessions[rk].sessions.push({d:0,slot:'',type:'raceday',dur:0,det:`${r.race} — ${r.dist.join('/')}km. Race day. Everything you\'ve trained for.`});
+    }
+
+    const weekKmRun = template.filter(t=>ST[t.type]?.sport==='run').reduce((a,t)=>a+(t.dur/6),0);
+    weeks.push({weekNum:w+1, phase:finalPhase, phaseIdx, sundayDate, daySessions, longKm, weekKmRun:Math.round(weekKmRun)});
+  }
+  // Save plan metadata to Supabase
+  const planMeta = {race_id:raceId, total_weeks:totalWks, base_weeks:base, build_weeks:build,
+    peak_weeks:peak, taper_weeks:taper,
+    plan_start:planStart.toISOString().split('T')[0],
+    race_date:raceDate.toISOString().split('T')[0]};
+  dbSaveTrainingPlan(planMeta);
+
+  // Save sessions to Supabase (async, non-blocking)
+  const sessRows = [];
+  weeks.forEach(w=>{
+    Object.values(w.daySessions).forEach(ds=>{
+      ds.sessions.forEach(s=>{
+        if(ST[s.type]?.sport!=='rest'&&ST[s.type]?.sport!=='race'){
+          sessRows.push({race_id:raceId, week_num:w.weekNum, phase:w.phase,
+            day_date:ds.date.toISOString().split('T')[0],
+            slot:s.slot||'', session_type:s.type, duration_min:s.dur||0, detail:s.det||''});
+        }
+      });
+    });
+  });
+  if(sessRows.length){dbSaveSessions(sessRows);}
+
+  return {raceId, totalWks, base, build, peak, taper, planStart, raceDate, weeks};
+}
+
+function getPhaseColor(p){
+  return{base:'#1565c0',build:'#e65100',peak:'#6a1b9a',taper:'#1b5e20',raceweek:'#c62828'}[p]||'#666';
+}
+function getPhaseName(p){
+  return{base:'Base',build:'Build',peak:'Peak',taper:'Taper',raceweek:'Race Week'}[p]||p;
+}
+
+function renderTrainingPlan(raceId){
+  const el=document.getElementById('tp-'+raceId);
+  if(!el) return;
+  let plan;
+  try{ plan=generateTrainingPlan(raceId); } catch(e){ el.innerHTML='<p style="color:red;font-size:12px;padding:8px">Plan error: '+e.message+'</p>'; console.error(e); return; }
+  if(!plan){el.innerHTML='<p style="font-size:12px;color:#aaa;padding:8px">Not enough time before race to generate a plan.</p>';return;}
+
+  // Sessions remaining
+  const today=new Date();today.setHours(0,0,0,0);
+  let totalSess=0, doneSess=0;
+  plan.weeks.forEach(w=>{
+    Object.values(w.daySessions).forEach(ds=>{
+      ds.sessions.forEach(s=>{
+        if(ST[s.type]?.sport!=='rest'){
+          totalSess++;
+          if(ds.date<today) doneSess++;
+        }
+      });
+    });
+  });
+  const sessLeft=totalSess-doneSess;
+
+  // Phase bar
+  const total=plan.totalWks||1;
+  const phaseBar=`
+    <div style="display:flex;gap:3px;align-items:center;margin:6px 0 10px;flex-wrap:wrap">
+      ${plan.base?`<div style="flex:${plan.base};background:#1565c0;height:8px;border-radius:3px;min-width:20px" title="Base ${plan.base}w"></div>`:''}
+      ${plan.build?`<div style="flex:${plan.build};background:#e65100;height:8px;border-radius:3px;min-width:20px" title="Build ${plan.build}w"></div>`:''}
+      ${plan.peak?`<div style="flex:${plan.peak};background:#6a1b9a;height:8px;border-radius:3px;min-width:20px" title="Peak ${plan.peak}w"></div>`:''}
+      ${plan.taper?`<div style="flex:${plan.taper};background:#1b5e20;height:8px;border-radius:3px;min-width:20px" title="Taper ${plan.taper}w"></div>`:''}
+      <span style="font-size:10px;color:#888;white-space:nowrap;margin-left:6px">
+        ${plan.base?`🔵Base ${plan.base}w `:''}${plan.build?`🟠Build ${plan.build}w `:''}${plan.peak?`🟣Peak ${plan.peak}w `:''}${plan.taper?`🟢Taper ${plan.taper}w`:''}
+      </span>
+    </div>`;
+
+  const DAYS_ORDER=[0,1,2,4,5];
+  const DAY_NAMES=['Sun','Mon','Tue','Thu','Fri'];
+
+  let weeksHtml='';
+  plan.weeks.forEach((w,wi)=>{
+    const isPast=new Date(w.sundayDate)<today&&new Date(w.sundayDate).setDate(w.sundayDate.getDate()+6)<today;
+    const isCurrent=!isPast&&new Date(w.sundayDate)<=new Date(today.getTime()+7*86400000);
+
+    // Build day grid
+    let daysHtml='';
+    DAYS_ORDER.forEach((offset,di)=>{
+      const dayDate=new Date(w.sundayDate);
+      dayDate.setDate(w.sundayDate.getDate()+offset);
+      const dkey=dayDate.toISOString().split('T')[0];
+      const dsObj=w.daySessions[dkey];
+      const dayPast=dayDate<today;
+      const dayToday=dayDate.toDateString()===today.toDateString();
+      let sessHtml='';
+      if(dsObj){
+        const amSess=dsObj.sessions.filter(s=>s.slot==='AM'||s.slot==='');
+        const pmSess=dsObj.sessions.filter(s=>s.slot==='PM');
+        [...amSess,...pmSess].forEach(s=>{
+          const st=ST[s.type]||ST.rest;
+          const durStr=s.dur?`${s.dur}min`:'';
+          const skey=raceId+'|'+dkey+'|'+s.slot+'|'+s.type;
+          const isDone=completedSessions[skey];
+          sessHtml+=`<div class="session-block ${st.cls}" style="${isDone?'opacity:.55;':''}" onclick="toggleSessionDone('${raceId}','${dkey}','${s.slot||''}','${s.type}')">
+            <span class="session-icon">${st.icon}</span>${isDone?'<s>':''}${s.slot?s.slot+': ':''}<strong>${st.label}</strong>${durStr?' · '+durStr:''}${isDone?'</s> ✅':''}
+            <div class="session-detail">${s.det||''}</div>
+          </div>`;
+        });
+      } else {
+        sessHtml=`<div class="session-block s-rest">😴 Rest / Recovery</div>`;
+      }
+      daysHtml+=`<div class="day-card${dayPast?' past':''}${dayToday?' today':''}">
+        <div class="day-name">${DAY_NAMES[di]} ${dayDate.getDate()}/${dayDate.getMonth()+1}</div>
+        ${sessHtml}
+      </div>`;
+    });
+
+    const wkColor=getPhaseColor(w.phase);
+    const wkName=getPhaseName(w.phase);
+    const open=isCurrent||wi===0;
+    weeksHtml+=`<div class="week-block">
+      <div class="week-hdr" onclick="var b=this.nextElementSibling;b.style.display=b.style.display==='grid'?'none':'grid';this.querySelector('.wk-arrow').textContent=b.style.display==='grid'?'▴':'▾'">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="week-label">Week ${w.weekNum}${isPast?' ✓':''}</span>
+          <span class="week-phase" style="background:${wkColor}">${wkName}</span>
+          ${w.weekKmRun?`<span style="font-size:10px;color:#888">~${w.weekKmRun}km run</span>`:''}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:10px;color:#888">${w.sundayDate.getDate()}/${w.sundayDate.getMonth()+1}</span>
+          <span class="wk-arrow" style="font-size:16px;color:#ccc">${open?'▴':'▾'}</span>
+        </div>
+      </div>
+      <div class="week-body" style="display:${open?'grid':'none'}">
+        ${daysHtml}
+      </div>
+    </div>`;
+  });
+
+  el.innerHTML=`
+    <div class="tp-header">
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#1a237e">${plan.totalWks}-Week Plan · ${sessLeft} sessions remaining</div>
+        <div style="font-size:10px;color:#888;margin-top:2px">
+          Sources: Fordyce (long run base) · Daniels (VDOT paces) · Pfitzinger (periodisation) · Maffetone (Zone 2 MAF) · 80/20 Fitzgerald · No training Sat or Wed
+        </div>
+      </div>
+      <span class="tp-sessions-left">⏳ ${sessLeft} sessions left</span>
+    </div>
+    ${phaseBar}
+    ${weeksHtml}`;
+}
+
+async function toggleSessionDone(raceId, dayDate, slot, type){
+  const k=raceId+'|'+dayDate+'|'+slot+'|'+type;
+  completedSessions[k]=!completedSessions[k];
+  // Update Supabase
+  dbTickSession(raceId,dayDate,slot,type,!!completedSessions[k]);
+  renderTrainingPlan(raceId);
+}
+function togglePlanCalendar(raceId){
+  const wrap=document.getElementById('tp-'+raceId);
+  if(!wrap) return;
+  wrap.style.display=wrap.style.display==='none'?'':'none';
+}
+
+// INIT
+document.getElementById('lDate').value=new Date().toISOString().split('T')[0];
+updateLogFields();
+loadSettings();
+render();renderLog();
+initData();
+
+function loadSettings(){
+  const s=settings;
+  const f=document.getElementById('sFuel');const c=document.getElementById('sCons');const a=document.getElementById('sAcc');const m=document.getElementById('sMeal');const n=document.getElementById('sNutr');
+  if(f)f.value=s.fuel;if(c)c.value=s.cons;if(a)a.value=s.acc;if(m)m.value=s.meal;if(n)n.value=s.nutr;
+}
+</script>
+</body>
+</html>
