@@ -127,6 +127,10 @@ td.rname{font-weight:600;color:#1a237e;max-width:190px}
 .empty-plan{text-align:center;padding:40px;color:#aaa;font-size:14px}
 .empty-plan span{font-size:40px;display:block;margin-bottom:10px}
 /* Training Log */
+.runner-selector{display:flex;gap:8px;margin-bottom:14px;background:#fff;padding:10px 14px;border-radius:10px;border:1px solid #e8ecf5;flex-wrap:wrap}
+.runner-btn{padding:8px 20px;border-radius:20px;cursor:pointer;font-size:13px;font-weight:600;color:#555;background:#f0f4f8;border:2px solid transparent;transition:all .15s}
+.runner-btn.active{background:#1a237e;color:#fff;border-color:#1a237e}
+.runner-btn:hover:not(.active){background:#e8f0fe;color:#1565c0}
 .log-container{padding:14px}
 .log-form-wrap{background:#fff;border-radius:10px;padding:16px;margin-bottom:14px;border:1px solid #e8ecf5}
 .log-form-wrap h3{font-size:13px;font-weight:700;color:#1a237e;margin-bottom:12px}
@@ -341,8 +345,13 @@ td.rname{font-weight:600;color:#1a237e;max-width:190px}
 <!-- TRAINING LOG TAB -->
 <div class="tab-content" id="tab-log">
 <div class="log-container">
+<div class="runner-selector">
+<div class="runner-btn active" id="rbtn-Matt" onclick="switchRunner('Matt')">👤 Matt</div>
+<div class="runner-btn" id="rbtn-Felicia" onclick="switchRunner('Felicia')">👤 Felicia</div>
+<div class="runner-btn" id="rbtn-Letitia" onclick="switchRunner('Letitia')">👤 Letitia</div>
+</div>
 <div class="log-form-wrap">
-<h3>➕ Log a Training Session</h3>
+<h3 id="logFormTitle">➕ Log a Training Session — <span id="logRunnerName">Matt</span></h3>
 <div class="form-grid">
 <div class="form-field"><label>Date</label><input type="date" id="lDate"></div>
 <div class="form-field"><label>Activity</label><select id="lAct" onchange="updateLogFields()">
@@ -495,12 +504,12 @@ async function initDataArtifact(){
 // ── Save / delete training log ─────────────────────────────
 async function dbSaveLog(e){
   if(!IS_ARTIFACT){
-    try{await sb.from('training_log').insert({id:e.id,date:e.date,act:e.act,env:e.env,mg:e.mg,km:e.km,min:e.min,hr:e.hr,rpe:e.rpe,hb:e.hb,ha:e.ha,wt:e.wt,cal:e.cal,notes:e.notes});}catch(err){console.warn('Log save:',err);}
+    try{await sb.from('training_log').insert({id:e.id,date:e.date,act:e.act,env:e.env,mg:e.mg,km:e.km,min:e.min,hr:e.hr,rpe:e.rpe,hb:e.hb,ha:e.ha,wt:e.wt,cal:e.cal,notes:e.notes,runner:e.runner||'Matt'});}catch(err){console.warn('Log save:',err);}
     return;
   }
-  await dbSQL(`INSERT INTO training_log (id,date,act,env,mg,km,min,hr,rpe,hb,ha,wt,cal,notes)
+  await dbSQL(`INSERT INTO training_log (id,date,act,env,mg,km,min,hr,rpe,hb,ha,wt,cal,notes,runner)
     VALUES (${e.id},'${_esc(e.date)}','${_esc(e.act)}','${_esc(e.env||'')}','${_esc(e.mg||'')}',
-    ${e.km||0},${e.min||0},${e.hr||0},${e.rpe||5},${e.hb?1:0},${e.ha||0},${e.wt||0},${e.cal||0},'${_esc(e.notes||'')}')
+    ${e.km||0},${e.min||0},${e.hr||0},${e.rpe||5},${e.hb?1:0},${e.ha||0},${e.wt||0},${e.cal||0},'${_esc(e.notes||'')}','${_esc(e.runner||'Matt')}')
     ON CONFLICT (id) DO UPDATE SET date=EXCLUDED.date,act=EXCLUDED.act,env=EXCLUDED.env,
     mg=EXCLUDED.mg,km=EXCLUDED.km,min=EXCLUDED.min,hr=EXCLUDED.hr,rpe=EXCLUDED.rpe,
     hb=EXCLUDED.hb,ha=EXCLUDED.ha,wt=EXCLUDED.wt,cal=EXCLUDED.cal,notes=EXCLUDED.notes`);
@@ -586,10 +595,18 @@ async function dbSaveTrainingPlan(meta){
 let showCQ=false;
 let myPlan=JSON.parse(localStorage.getItem('racePlan')||'[]');
 let trainingLog=JSON.parse(localStorage.getItem('trainingLog')||'[]');
+let currentRunner=localStorage.getItem('currentRunner')||'Matt';
 let raceStatuses={};
 let settings=JSON.parse(localStorage.getItem('tripSettings')||'{"fuel":23.50,"cons":10,"acc":900,"meal":180,"nutr":150}');
 
 async function initData(){
+  // Set active runner button on load
+  ['Matt','Felicia','Letitia'].forEach(n=>{
+    const b=document.getElementById('rbtn-'+n);
+    if(b) b.classList.toggle('active',n===currentRunner);
+  });
+  const nameEl=document.getElementById('logRunnerName');
+  if(nameEl) nameEl.textContent=currentRunner;
   if(IS_ARTIFACT){await initDataArtifact();return;}
   const el=document.getElementById('syncStatus');
   if(el)el.textContent='syncing...';
@@ -648,6 +665,17 @@ function calcTrip(r){
   const entry=r.dist.includes('42')?(r.fee42n||300):(r.fee21n||220);
   const total=fuel+tolls+acc+meals+nutr+entry;
   return{fuel,tolls,acc,meals,nutr,entry,total,isFlight:false};
+}
+function safairUrl(r){
+  const months={Jan:1,Feb:2,Mar:3,Apr:4,May:5,Jun:6,Jul:7,Aug:8,Sep:9,Oct:10,Nov:11,Dec:12};
+  const parts=r.date.split(' ');
+  const day=parseInt(parts[1]);
+  const month=months[parts[2]];
+  const year=r.year||2026;
+  const raceDate=new Date(year,month-1,day);
+  const deptDate=new Date(raceDate);deptDate.setDate(raceDate.getDate()-2);
+  const fmt=d=>`${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+  return `https://www.flysafair.co.za/book-a-flight#/select?from=JNB&to=CPT&type=R&dep=${fmt(deptDate)}&ret=${fmt(raceDate)}&adt=1&chd=0&inf=0`;
 }
 function getSettings(){
   return{
@@ -964,6 +992,7 @@ ${tripRows}
 <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;width:100%">
 <button class="plan-btn ${inPlan?'added':''}" id="planToggleBtn" onclick="togglePlan('${id}')">${inPlan?'❌ Remove from Plan':'✅ Add to My Plan'}</button>
 ${r.url?`<a href="${r.url}" target="_blank" class="mbtn mbtn-p" onclick="markRaceChecked('${id}')">🎟 Enter / Race Site</a>`:'<span style="font-size:11px;color:#aaa">No entry URL on file</span>'}
+${tc.isFlight?`<a href="${safairUrl(r)}" target="_blank" class="mbtn" style="background:#e91e63;color:#fff">✈ Check Flights — FlySafair</a>`:''}
 <button class="mbtn ${statusCls}" onclick="cycleRaceStatus('${id}','${statusNext}')">${statusIcon} ${statusLabel}</button>
 <span style="font-size:10px;color:#aaa">verified: ${lastChk}</span>
 <button class="mbtn mbtn-c" onclick="closeModal()" style="margin-left:auto">✕ Close</button>
@@ -1126,6 +1155,17 @@ function updateLogFields(){
   document.getElementById('fEnv').style.display='';
   calcCalories();
 }
+function switchRunner(name){
+  currentRunner=name;
+  localStorage.setItem('currentRunner',name);
+  ['Matt','Felicia','Letitia'].forEach(n=>{
+    const b=document.getElementById('rbtn-'+n);
+    if(b) b.classList.toggle('active',n===name);
+  });
+  const nameEl=document.getElementById('logRunnerName');
+  if(nameEl) nameEl.textContent=name;
+  renderLog();
+}
 async function logEntry(){
   const d=document.getElementById('lDate').value;
   const act=document.getElementById('lAct').value;
@@ -1141,7 +1181,7 @@ async function logEntry(){
   const cal=parseInt(document.getElementById('lCal').value)||0;
   const notes=document.getElementById('lNotes').value;
   if(!d||!act){alert('Please fill in date and activity type.');return;}
-  const entry={id:Date.now(),date:d,act,env:env||null,mg:mg||null,km:km||null,min:min||null,hr:hr||null,rpe:rpe||null,hb:hb||null,ha:ha||null,wt:wt||null,cal:cal||null,notes:notes||null};
+  const entry={id:Date.now(),date:d,act,env:env||null,mg:mg||null,km:km||null,min:min||null,hr:hr||null,rpe:rpe||null,hb:hb||null,ha:ha||null,wt:wt||null,cal:cal||null,notes:notes||null,runner:currentRunner};
   trainingLog.unshift(entry);
   localStorage.setItem('trainingLog',JSON.stringify(trainingLog));
   document.getElementById('lKm').value='';document.getElementById('lMin').value='';document.getElementById('lHR').value='';document.getElementById('lRPE').value='';document.getElementById('lHB').value='';document.getElementById('lHA').value='';document.getElementById('lNotes').value='';document.getElementById('lCal').value='';delete document.getElementById('lCal').dataset.manual;
@@ -1164,16 +1204,17 @@ const MG_LABEL={push:'Push',pull:'Pull',legs:'Legs',fullbody:'Full Body',core:'C
 const HEEL_CLR=['#1b5e20','#1b5e20','#33691e','#f9a825','#f57c00','#e65100','#c62828','#b71c1c','#880e4f','#880e4f','#880e4f'];
 
 function renderLog(){
+  const log=trainingLog.filter(e=>(!e.runner||e.runner===currentRunner));
   const today=new Date();today.setHours(0,0,0,0);
   const w7=new Date(today.getTime()-7*86400000);
   const w28=new Date(today.getTime()-28*86400000);
-  const week=trainingLog.filter(e=>new Date(e.date)>=w7);
-  const month=trainingLog.filter(e=>new Date(e.date)>=w28);
+  const week=log.filter(e=>new Date(e.date)>=w7);
+  const month=log.filter(e=>new Date(e.date)>=w28);
   const weekKm=week.filter(e=>e.act==='run'||e.act==='walk').reduce((a,b)=>a+b.km,0);
   const weekMin=week.reduce((a,b)=>a+b.min,0);
   const weekDays=new Set(week.map(e=>e.date)).size;
-  const latestWt=trainingLog.find(e=>e.wt>0);
-  const firstWt=trainingLog.filter(e=>e.wt>0).slice(-1)[0];
+  const latestWt=log.find(e=>e.wt>0);
+  const firstWt=log.filter(e=>e.wt>0).slice(-1)[0];
   const wtDelta=latestWt&&firstWt&&latestWt.id!==firstWt.id?((latestWt.wt-firstWt.wt).toFixed(1)):'—';
 
   document.getElementById('logSummary').innerHTML=`
@@ -1183,16 +1224,16 @@ function renderLog(){
 <div class="ls-card"><div class="ls-val" style="color:#e65100">${week.reduce((a,b)=>a+(b.cal||0),0).toLocaleString()}</div><div class="ls-label">🔥 kcal this week</div></div>
 <div class="ls-card"><div class="ls-val" style="color:${latestWt&&latestWt.wt<=100?'#1b5e20':'#1565c0'}">${latestWt?latestWt.wt+'kg':'—'}</div><div class="ls-label">Latest weight</div></div>
 <div class="ls-card"><div class="ls-val" style="color:${parseFloat(wtDelta)<0?'#1b5e20':'#c62828'}">${wtDelta==='—'?'—':(parseFloat(wtDelta)<0?'':'+')+(wtDelta)+'kg'}</div><div class="ls-label">Total weight change</div></div>
-<div class="ls-card"><div class="ls-val">${trainingLog.length}</div><div class="ls-label">Total sessions</div></div>
+<div class="ls-card"><div class="ls-val">${log.length}</div><div class="ls-label">Total sessions</div></div>
 `;
 
-  if(!trainingLog.length){
+  if(!log.length){
     document.getElementById('logList').innerHTML='<p style="text-align:center;color:#aaa;padding:20px">No sessions logged yet. Add your first session above!</p>';
     document.getElementById('trendsWrap').innerHTML='';
     return;
   }
   let html='';
-  trainingLog.slice(0,60).forEach(e=>{
+  log.slice(0,60).forEach(e=>{
     const dets=[];
     if(e.env)dets.push(ENV_LABEL[e.env]||e.env);
     if(e.km)dets.push(e.km+'km');
@@ -1213,24 +1254,25 @@ function renderLog(){
 </div>`;
   });
   document.getElementById('logList').innerHTML=html;
-  renderTrends(month);
+  renderTrends(month,log);
 }
 
-function renderTrends(month){
-  if(trainingLog.length<3){document.getElementById('trendsWrap').innerHTML='';return;}
+function renderTrends(month,log){
+  log=log||trainingLog;
+  if(log.length<3){document.getElementById('trendsWrap').innerHTML='';return;}
   // Running env split
-  const runs=trainingLog.filter(e=>e.act==='run');
+  const runs=log.filter(e=>e.act==='run');
   const roadRuns=runs.filter(e=>e.env==='road');
   const millRuns=runs.filter(e=>e.env==='treadmill');
   const roadKm=roadRuns.reduce((a,b)=>a+b.km,0);
   const millKm=millRuns.reduce((a,b)=>a+b.km,0);
   const totalRunKm=roadKm+millKm;
   // Cycling split
-  const cycles=trainingLog.filter(e=>e.act==='cycle');
+  const cycles=log.filter(e=>e.act==='cycle');
   const outdoorCyc=cycles.filter(e=>e.env==='outdoor');
   const indoorCyc=cycles.filter(e=>e.env==='indoor');
   // Weights muscle groups
-  const wts=trainingLog.filter(e=>e.act==='weights');
+  const wts=log.filter(e=>e.act==='weights');
   const mgCounts={};wts.forEach(e=>{if(e.mg)mgCounts[e.mg]=(mgCounts[e.mg]||0)+1;});
   // Heel trend
   const heelRuns=runs.filter(e=>e.ha>0);
@@ -1253,7 +1295,7 @@ function renderTrends(month){
 <div style="margin-bottom:5px"><div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px"><span>${ACT_ICON[k]} ${ACT_LABEL[k]}</span><span>${v} sessions</span></div>
 <div style="background:#e8ecf5;border-radius:4px;height:7px"><div style="background:#1565c0;width:${Math.round(v/actTotal*100)}%;height:100%;border-radius:4px"></div></div></div>`).join('');
   // Weight progress to target
-  const latestWt=trainingLog.find(e=>e.wt>0);
+  const latestWt=log.find(e=>e.wt>0);
   const wtToTarget=latestWt?(latestWt.wt-100).toFixed(1):'—';
   const wtPct=latestWt?Math.min(100,Math.round(((130-latestWt.wt)/30)*100)):0;
 
